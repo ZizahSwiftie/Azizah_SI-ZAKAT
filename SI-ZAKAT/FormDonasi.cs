@@ -35,6 +35,38 @@ namespace SI_ZAKAT
             }
         }
 
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    // Ambil NIK saja dari ComboBox (ambil string sebelum tanda "-")
+                    string nikDonatur = cbDonatur.SelectedItem.ToString().Split('-')[0].Trim();
+
+                    string query = "INSERT INTO Tabel_Donasi (nik_warga, kategori, jumlah, tanggal, status) " +
+                                   "VALUES (@nik, @kat, @jml, @tgl, @status)";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@nik", nikDonatur);
+                    cmd.Parameters.AddWithValue("@kat", cbKategori.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@jml", decimal.Parse(txtJumlah.Text));
+                    cmd.Parameters.AddWithValue("@tgl", dtpTanggal.Value);
+                    cmd.Parameters.AddWithValue("@status", "Pending"); // Status default
+
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Donasi Berhasil Disubmit! Menunggu validasi admin.", "Sukses");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal Submit: " + ex.Message);
+                }
+            }
+        }
+
+
+
 
     }
 }

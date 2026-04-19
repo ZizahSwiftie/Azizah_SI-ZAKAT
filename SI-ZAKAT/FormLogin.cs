@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+// 1. WAJIB tambahkan namespace ini
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-// 1. WAJIB tambahkan namespace ini
-using System.Data.SqlClient;
 
 namespace SI_ZAKAT
 {
@@ -16,7 +17,7 @@ namespace SI_ZAKAT
     {
         // 2. Atur String Koneksi (Sesuaikan "Data Source" dengan nama server SQL kamu)
         // Jika pakai SQL Express biasanya: @"Data Source=.\SQLEXPRESS;Initial Catalog=DB_SIZAKAT;Integrated Security=True"
-        string connectionString = @"Data Source=NAMA_SERVER_KAMU;Initial Catalog=DB_SIZAKAT;Integrated Security=True";
+        string connectionString = @"Data Source=AZIZAH\AZIZAH;Initial Catalog=DB_SIZAKAT;Integrated Security=True";
 
         public FormLogin()
         {

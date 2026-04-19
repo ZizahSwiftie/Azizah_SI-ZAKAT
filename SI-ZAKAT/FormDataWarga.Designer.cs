@@ -1,6 +1,6 @@
 ﻿namespace SI_ZAKAT
 {
-    partial class Form1
+    partial class FormDataWarga
     {
         /// <summary>
         /// Required designer variable.

@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace SI_ZAKAT
 {
-    public partial class Form1 : Form
+    public partial class FormDataWarga : Form
     {
         // Sesuaikan nama server dengan laptop kamu (AZIZAH\AZIZAH)
         string connectionString = @"Data Source=AZIZAH\AZIZAH;Initial Catalog=DB_SIZAKAT;Integrated Security=True";
 
-        public Form1()
+        public FormDataWarga()
         {
             InitializeComponent();
         }

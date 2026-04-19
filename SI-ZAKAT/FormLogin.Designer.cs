@@ -42,7 +42,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(140, 323);
+            this.label1.Location = new System.Drawing.Point(173, 323);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 20);
             this.label1.TabIndex = 0;
@@ -51,7 +51,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(140, 388);
+            this.label2.Location = new System.Drawing.Point(173, 388);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 1;
@@ -59,14 +59,14 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(283, 324);
+            this.txtUsername.Location = new System.Drawing.Point(303, 323);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(211, 26);
             this.txtUsername.TabIndex = 2;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(283, 382);
+            this.txtPassword.Location = new System.Drawing.Point(303, 382);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(211, 26);
             this.txtPassword.TabIndex = 3;
@@ -75,7 +75,7 @@
             // chkShow
             // 
             this.chkShow.AutoSize = true;
-            this.chkShow.Location = new System.Drawing.Point(283, 430);
+            this.chkShow.Location = new System.Drawing.Point(303, 423);
             this.chkShow.Name = "chkShow";
             this.chkShow.Size = new System.Drawing.Size(148, 24);
             this.chkShow.TabIndex = 4;

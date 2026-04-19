@@ -41,6 +41,34 @@ namespace SI_ZAKAT
             }
         }
 
+        public void TampilkanData()
+        {
+        using (SqlConnection conn = new SqlConnection(connectionString))
+    {
+            try
+            {
+             conn.Open(); 
+             string query = "SELECT * FROM Tabel_Warga"; 
+             SqlCommand cmd = new SqlCommand(query, conn); 
+            
+            // Menggunakan SqlDataReader (Metode ExecuteReader)
+            SqlDataReader reader = cmd.ExecuteReader(); 
+            
+            // Menyiapkan DataTable untuk menampung hasil bacaan
+            DataTable dt = new DataTable();
+                     dt.Load(reader); 
+            
+            // Menampilkan data ke DataGridView
+            dgvWarga.DataSource = dt;
+
+                    reader.Close(); 
+        }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal menampilkan data: " + ex.Message);
+                }
+            }
+        }
         private void btnSimpan_Click(object sender, EventArgs e)
         {
             // 1. Validasi Input (Bagian F - Soal UCP)

@@ -35,6 +35,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSimpan = new System.Windows.Forms.Button();
+            this.dgvWarga = new System.Windows.Forms.DataGridView();
+            this.btnTampil = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWarga)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNIK
@@ -87,7 +90,7 @@
             // 
             // btnSimpan
             // 
-            this.btnSimpan.Location = new System.Drawing.Point(346, 298);
+            this.btnSimpan.Location = new System.Drawing.Point(347, 255);
             this.btnSimpan.Name = "btnSimpan";
             this.btnSimpan.Size = new System.Drawing.Size(118, 38);
             this.btnSimpan.TabIndex = 6;
@@ -95,11 +98,32 @@
             this.btnSimpan.UseVisualStyleBackColor = true;
             this.btnSimpan.Click += new System.EventHandler(this.btnSimpan_Click);
             // 
+            // dgvWarga
+            // 
+            this.dgvWarga.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvWarga.Location = new System.Drawing.Point(57, 337);
+            this.dgvWarga.Name = "dgvWarga";
+            this.dgvWarga.RowHeadersWidth = 62;
+            this.dgvWarga.RowTemplate.Height = 28;
+            this.dgvWarga.Size = new System.Drawing.Size(690, 248);
+            this.dgvWarga.TabIndex = 7;
+            // 
+            // btnTampil
+            // 
+            this.btnTampil.Location = new System.Drawing.Point(569, 288);
+            this.btnTampil.Name = "btnTampil";
+            this.btnTampil.Size = new System.Drawing.Size(178, 27);
+            this.btnTampil.TabIndex = 8;
+            this.btnTampil.Text = "Tampilkan Data";
+            this.btnTampil.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(809, 618);
+            this.Controls.Add(this.btnTampil);
+            this.Controls.Add(this.dgvWarga);
             this.Controls.Add(this.btnSimpan);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -110,6 +134,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWarga)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,6 +149,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSimpan;
+        private System.Windows.Forms.DataGridView dgvWarga;
+        private System.Windows.Forms.Button btnTampil;
     }
 }
 

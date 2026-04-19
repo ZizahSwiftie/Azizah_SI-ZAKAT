@@ -34,8 +34,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnSalur = new System.Windows.Forms.Button();
-            this.txtJumlahKeluar = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.txtJumlah = new System.Windows.Forms.TextBox();
+            this.dtpTanggal = new System.Windows.Forms.DateTimePicker();
             this.cbBarang = new System.Windows.Forms.ComboBox();
             this.cbMustahik = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -94,19 +94,19 @@
             this.btnSalur.Text = "Salurkan Bantuan";
             this.btnSalur.UseVisualStyleBackColor = true;
             // 
-            // txtJumlahKeluar
+            // txtJumlah
             // 
-            this.txtJumlahKeluar.Location = new System.Drawing.Point(317, 227);
-            this.txtJumlahKeluar.Name = "txtJumlahKeluar";
-            this.txtJumlahKeluar.Size = new System.Drawing.Size(264, 26);
-            this.txtJumlahKeluar.TabIndex = 7;
+            this.txtJumlah.Location = new System.Drawing.Point(317, 227);
+            this.txtJumlah.Name = "txtJumlah";
+            this.txtJumlah.Size = new System.Drawing.Size(264, 26);
+            this.txtJumlah.TabIndex = 7;
             // 
-            // dateTimePicker1
+            // dtpTanggal
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(317, 123);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(264, 26);
-            this.dateTimePicker1.TabIndex = 8;
+            this.dtpTanggal.Location = new System.Drawing.Point(317, 123);
+            this.dtpTanggal.Name = "dtpTanggal";
+            this.dtpTanggal.Size = new System.Drawing.Size(264, 26);
+            this.dtpTanggal.TabIndex = 8;
             // 
             // cbBarang
             // 
@@ -131,8 +131,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.cbMustahik);
             this.Controls.Add(this.cbBarang);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.txtJumlahKeluar);
+            this.Controls.Add(this.dtpTanggal);
+            this.Controls.Add(this.txtJumlah);
             this.Controls.Add(this.btnSalur);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -154,8 +154,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnSalur;
-        private System.Windows.Forms.TextBox txtJumlahKeluar;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox txtJumlah;
+        private System.Windows.Forms.DateTimePicker dtpTanggal;
         private System.Windows.Forms.ComboBox cbBarang;
         private System.Windows.Forms.ComboBox cbMustahik;
     }

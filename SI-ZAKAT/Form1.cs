@@ -43,26 +43,26 @@ namespace SI_ZAKAT
 
         public void TampilkanData()
         {
-        using (SqlConnection conn = new SqlConnection(connectionString))
-    {
-            try
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-             conn.Open(); 
-             string query = "SELECT * FROM Tabel_Warga"; 
-             SqlCommand cmd = new SqlCommand(query, conn); 
-            
-            // Menggunakan SqlDataReader (Metode ExecuteReader)
-            SqlDataReader reader = cmd.ExecuteReader(); 
-            
-            // Menyiapkan DataTable untuk menampung hasil bacaan
-            DataTable dt = new DataTable();
-                     dt.Load(reader); 
-            
-            // Menampilkan data ke DataGridView
-            dgvWarga.DataSource = dt;
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Tabel_Warga";
+                    SqlCommand cmd = new SqlCommand(query, conn);
 
-                    reader.Close(); 
-        }
+                    // Menggunakan SqlDataReader (Metode ExecuteReader)
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    // Menyiapkan DataTable untuk menampung hasil bacaan
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+
+                    // Menampilkan data ke DataGridView
+                    dgvWarga.DataSource = dt;
+
+                    reader.Close();
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Gagal menampilkan data: " + ex.Message);
@@ -115,6 +115,12 @@ namespace SI_ZAKAT
                 }
             }
         }
+
+        private void btnTampil_Click(object sender, EventArgs e)
+        {
+            TampilkanData();
+        }
     }
-    
+
 }
+    

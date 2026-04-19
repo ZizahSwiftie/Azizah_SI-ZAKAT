@@ -81,6 +81,7 @@
             this.chkShow.TabIndex = 4;
             this.chkShow.Text = "Show Password";
             this.chkShow.UseVisualStyleBackColor = true;
+            this.chkShow.Click += new System.EventHandler(this.chkShow_CheckedChanged);
             // 
             // btnLogin
             // 
@@ -90,6 +91,7 @@
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "LOGIN";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // pictureBox1
             // 

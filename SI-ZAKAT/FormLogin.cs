@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 // 1. WAJIB tambahkan namespace ini
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -28,7 +29,7 @@ namespace SI_ZAKAT
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // 3. Validasi Input Kosong
+            // 1. Validasi Input Kosong
             if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 MessageBox.Show("Username dan Password tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -37,32 +38,49 @@ namespace SI_ZAKAT
 
             try
             {
+                // Gunakan blok using agar koneksi otomatis tertutup jika terjadi error
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    // 4. Query untuk mengecek data warga dengan peran Admin (Sesuai SRS)
-                    string query = "SELECT COUNT(*) FROM Tabel_Warga WHERE nama=@user AND password=@pass AND peran='Admin'";
+
+                    // 2. Query untuk mengambil Peran (agar bisa membedakan Admin dan User)
+                    string query = "SELECT peran FROM Tabel_Warga WHERE nama=@user AND password=@pass";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // 5. Menggunakan Parameter agar AMAN
                         cmd.Parameters.AddWithValue("@user", txtUsername.Text);
                         cmd.Parameters.AddWithValue("@pass", txtPassword.Text);
 
-                        // Mengambil hasil hitungan (ExecuteScalar)
-                        int result = Convert.ToInt32(cmd.ExecuteScalar());
-
-                        if (result > 0)
+                        // Menggunakan ExecuteReader karena kita butuh membaca nilai kolom 'peran'
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            MessageBox.Show("Login Berhasil! Selamat Datang Admin.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (reader.Read()) // Jika data ditemukan
+                            {
+                                string peran = reader["peran"].ToString();
 
-                            // 6. Pindah ke Form Dashboard
-                            
-        
-                        }
-                        else
-                        {
-                            MessageBox.Show("Username/Password salah atau Anda bukan Admin!", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Login Berhasil! Selamat Datang " + peran, "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                // 3. PINDAH KE FORM SESUAI PERAN
+                                this.Hide();
+
+                                if (peran == "Admin")
+                                {
+                                    // Pastikan nama form kamu adalah FormDataWarga atau ganti sesuai nama form Adminmu
+                                    FormDataWarga formAdmin = new FormDataWarga();
+                                    formAdmin.Show();
+                                }
+                                else
+                                {
+                                    // Jika dia Muzakki/User biasa, arahkan ke dashboard user
+                                    // Pastikan kamu punya form bernama FormDashboard atau sesuaikan namanya
+                                    FormDashboard formUser = new FormDashboard();
+                                    formUser.Show();
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Username atau Password salah!", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                 }
@@ -72,11 +90,15 @@ namespace SI_ZAKAT
                 MessageBox.Show("Terjadi Kesalahan Koneksi: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        // Fitur Show/Hide Password
         private void chkShow_CheckedChanged(object sender, EventArgs e)
         {
+            // Toggle visibility password
             txtPassword.UseSystemPasswordChar = !chkShow.Checked;
         }
     }
 }
+
+
+
+
+

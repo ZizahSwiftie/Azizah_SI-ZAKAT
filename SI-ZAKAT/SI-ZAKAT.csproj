@@ -76,6 +76,12 @@
     <Compile Include="FormPenyaluran.Designer.cs">
       <DependentUpon>FormPenyaluran.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRiwayatDonasi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRiwayatDonasi.Designer.cs">
+      <DependentUpon>FormRiwayatDonasi.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormStokSembako.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPenyaluran.resx">
       <DependentUpon>FormPenyaluran.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRiwayatDonasi.resx">
+      <DependentUpon>FormRiwayatDonasi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormStokSembako.resx">
       <DependentUpon>FormStokSembako.cs</DependentUpon>

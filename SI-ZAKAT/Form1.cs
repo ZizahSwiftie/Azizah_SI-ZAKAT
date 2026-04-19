@@ -43,7 +43,8 @@ namespace SI_ZAKAT
 
         private void btnSimpan_Click(object sender, EventArgs e)
         {
-            
+            // 1. Validasi Input (Bagian F - Soal UCP)
+            // Memastikan field penting tidak kosong sebelum diproses
             if (string.IsNullOrEmpty(txtNIK.Text) || string.IsNullOrEmpty(txtNama.Text) || string.IsNullOrEmpty(txtAlamat.Text))
             {
                 MessageBox.Show("Semua data wajib diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);

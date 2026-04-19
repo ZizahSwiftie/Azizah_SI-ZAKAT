@@ -120,6 +120,44 @@ namespace SI_ZAKAT
         {
             TampilkanData();
         }
+
+        private void btnCari_Click(object sender, EventArgs e)
+        {
+            // Menggunakan koneksi database [cite: 130, 443]
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    // Query untuk mencari berdasarkan Nama atau NIK [cite: 45, 141]
+                    string query = "SELECT * FROM Tabel_Warga WHERE nama LIKE @cari OR NIK LIKE @cari";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    // Menambahkan parameter pencarian dengan wildcard (%) [cite: 334, 335]
+                    cmd.Parameters.AddWithValue("@cari", "%" + txtCari.Text + "%");
+
+                    // Membaca data menggunakan SqlDataReader [cite: 161, 209]
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    DataTable dt = new DataTable();
+                    dt.Load(reader);
+
+                    // Menampilkan hasil pencarian ke DataGridView [cite: 89, 140]
+                    dgvWarga.DataSource = dt;
+
+                    // Jika data tidak ditemukan, tampilkan pesan 
+                    if (dt.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Data tidak ditemukan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Terjadi kesalahan saat mencari: " + ex.Message);
+                }
+            }
+        }
     }
 
 }

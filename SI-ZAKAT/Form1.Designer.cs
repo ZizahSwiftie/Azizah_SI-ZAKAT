@@ -35,35 +35,39 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSimpan = new System.Windows.Forms.Button();
-            this.dgvWarga = new System.Windows.Forms.DataGridView();
-            this.btnTampil = new System.Windows.Forms.Button();
+            this.dgvDataWarga = new System.Windows.Forms.DataGridView();
+            this.btnTampilkanData = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.cbPeran = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtCari = new System.Windows.Forms.TextBox();
             this.btnCari = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvWarga)).BeginInit();
+            this.txtCari = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDataWarga)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtNIK
             // 
-            this.txtNIK.Location = new System.Drawing.Point(208, 178);
+            this.txtNIK.Location = new System.Drawing.Point(190, 74);
             this.txtNIK.Name = "txtNIK";
             this.txtNIK.Size = new System.Drawing.Size(267, 26);
             this.txtNIK.TabIndex = 0;
             // 
             // txtNama
             // 
-            this.txtNama.Location = new System.Drawing.Point(208, 233);
+            this.txtNama.Location = new System.Drawing.Point(190, 132);
             this.txtNama.Name = "txtNama";
             this.txtNama.Size = new System.Drawing.Size(267, 26);
             this.txtNama.TabIndex = 1;
             // 
             // txtAlamat
             // 
-            this.txtAlamat.Location = new System.Drawing.Point(208, 286);
+            this.txtAlamat.Location = new System.Drawing.Point(190, 191);
             this.txtAlamat.Multiline = true;
             this.txtAlamat.Name = "txtAlamat";
             this.txtAlamat.Size = new System.Drawing.Size(267, 71);
@@ -72,7 +76,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(56, 184);
+            this.label1.Location = new System.Drawing.Point(65, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 20);
             this.label1.TabIndex = 3;
@@ -81,7 +85,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(56, 236);
+            this.label2.Location = new System.Drawing.Point(65, 138);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 20);
             this.label2.TabIndex = 4;
@@ -90,7 +94,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(56, 292);
+            this.label3.Location = new System.Drawing.Point(65, 194);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 20);
             this.label3.TabIndex = 5;
@@ -98,7 +102,7 @@
             // 
             // btnSimpan
             // 
-            this.btnSimpan.Location = new System.Drawing.Point(208, 466);
+            this.btnSimpan.Location = new System.Drawing.Point(69, 380);
             this.btnSimpan.Name = "btnSimpan";
             this.btnSimpan.Size = new System.Drawing.Size(118, 38);
             this.btnSimpan.TabIndex = 6;
@@ -106,30 +110,30 @@
             this.btnSimpan.UseVisualStyleBackColor = true;
             this.btnSimpan.Click += new System.EventHandler(this.btnSimpan_Click);
             // 
-            // dgvWarga
+            // dgvDataWarga
             // 
-            this.dgvWarga.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvWarga.Location = new System.Drawing.Point(654, 178);
-            this.dgvWarga.Name = "dgvWarga";
-            this.dgvWarga.RowHeadersWidth = 62;
-            this.dgvWarga.RowTemplate.Height = 28;
-            this.dgvWarga.Size = new System.Drawing.Size(690, 368);
-            this.dgvWarga.TabIndex = 7;
+            this.dgvDataWarga.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDataWarga.Location = new System.Drawing.Point(654, 178);
+            this.dgvDataWarga.Name = "dgvDataWarga";
+            this.dgvDataWarga.RowHeadersWidth = 62;
+            this.dgvDataWarga.RowTemplate.Height = 28;
+            this.dgvDataWarga.Size = new System.Drawing.Size(690, 368);
+            this.dgvDataWarga.TabIndex = 7;
+            this.dgvDataWarga.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataWarga_CellClick);
             // 
-            // btnTampil
+            // btnTampilkanData
             // 
-            this.btnTampil.Location = new System.Drawing.Point(654, 563);
-            this.btnTampil.Name = "btnTampil";
-            this.btnTampil.Size = new System.Drawing.Size(188, 39);
-            this.btnTampil.TabIndex = 8;
-            this.btnTampil.Text = "Tampilkan Data";
-            this.btnTampil.UseVisualStyleBackColor = true;
-            this.btnTampil.Click += new System.EventHandler(this.btnTampil_Click);
+            this.btnTampilkanData.Location = new System.Drawing.Point(654, 563);
+            this.btnTampilkanData.Name = "btnTampilkanData";
+            this.btnTampilkanData.Size = new System.Drawing.Size(188, 39);
+            this.btnTampilkanData.TabIndex = 8;
+            this.btnTampilkanData.Text = "Tampilkan Data";
+            this.btnTampilkanData.Click += new System.EventHandler(this.btnTampilkanData_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(56, 390);
+            this.label4.Location = new System.Drawing.Point(65, 299);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 20);
             this.label4.TabIndex = 11;
@@ -141,7 +145,7 @@
             this.cbPeran.Items.AddRange(new object[] {
             "Muzakki",
             "Mustahik"});
-            this.cbPeran.Location = new System.Drawing.Point(208, 382);
+            this.cbPeran.Location = new System.Drawing.Point(190, 291);
             this.cbPeran.Name = "cbPeran";
             this.cbPeran.Size = new System.Drawing.Size(267, 28);
             this.cbPeran.TabIndex = 12;
@@ -158,22 +162,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pencarian";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 42);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(113, 20);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Cari Nama/NIK";
-            // 
-            // txtCari
-            // 
-            this.txtCari.Location = new System.Drawing.Point(150, 39);
-            this.txtCari.Name = "txtCari";
-            this.txtCari.Size = new System.Drawing.Size(419, 26);
-            this.txtCari.TabIndex = 1;
-            // 
             // btnCari
             // 
             this.btnCari.Location = new System.Drawing.Point(587, 33);
@@ -183,31 +171,80 @@
             this.btnCari.Text = "Cari";
             this.btnCari.UseVisualStyleBackColor = true;
             // 
+            // txtCari
+            // 
+            this.txtCari.Location = new System.Drawing.Point(150, 39);
+            this.txtCari.Name = "txtCari";
+            this.txtCari.Size = new System.Drawing.Size(419, 26);
+            this.txtCari.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(19, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(113, 20);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Cari Nama/NIK";
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(221, 380);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(117, 38);
+            this.btnUpdate.TabIndex = 15;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(368, 380);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(106, 38);
+            this.btnDelete.TabIndex = 16;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtNama);
+            this.groupBox2.Controls.Add(this.btnDelete);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.txtNIK);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.btnUpdate);
+            this.groupBox2.Controls.Add(this.txtAlamat);
+            this.groupBox2.Controls.Add(this.cbPeran);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.btnSimpan);
+            this.groupBox2.Location = new System.Drawing.Point(40, 76);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(575, 470);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Input Data";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1369, 655);
+            this.ClientSize = new System.Drawing.Size(1459, 655);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.cbPeran);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.btnTampil);
-            this.Controls.Add(this.dgvWarga);
-            this.Controls.Add(this.btnSimpan);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtAlamat);
-            this.Controls.Add(this.txtNama);
-            this.Controls.Add(this.txtNIK);
+            this.Controls.Add(this.btnTampilkanData);
+            this.Controls.Add(this.dgvDataWarga);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvWarga)).EndInit();
+            this.Click += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDataWarga)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -220,14 +257,17 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSimpan;
-        private System.Windows.Forms.DataGridView dgvWarga;
-        private System.Windows.Forms.Button btnTampil;
+        private System.Windows.Forms.DataGridView dgvDataWarga;
+        private System.Windows.Forms.Button btnTampilkanData;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbPeran;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtCari;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCari;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

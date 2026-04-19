@@ -77,6 +77,7 @@
             this.btnSubmit.TabIndex = 4;
             this.btnSubmit.Text = "Submit Donasi";
             this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // label1
             // 
@@ -130,6 +131,7 @@
             this.Controls.Add(this.cbDonatur);
             this.Name = "FormDonasi";
             this.Text = "FormDonasi";
+            this.Click += new System.EventHandler(this.FormDonasi_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -46,7 +46,7 @@ namespace SI_ZAKAT
                 {
                     conn.Open();
                     MessageBox.Show("Koneksi ke Database SI-ZAKAT Berhasil!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    TampilkanData();
+
                 }
                 catch (Exception ex)
                 {
@@ -58,6 +58,13 @@ namespace SI_ZAKAT
         // TOMBOL SIMPAN (CREATE)
         private void btnSimpan_Click(object sender, EventArgs e)
         {
+            // VALIDASI: Cek apakah ComboBox sudah dipilih atau belum
+            if (cbPeran.SelectedItem == null)
+            {
+                MessageBox.Show("Pilih Peran terlebih dahulu (Muzakki/Mustahik)!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Berhenti di sini, jangan lanjut ke database
+            }
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
@@ -68,15 +75,21 @@ namespace SI_ZAKAT
                     cmd.Parameters.AddWithValue("@nik", txtNIK.Text);
                     cmd.Parameters.AddWithValue("@nama", txtNama.Text);
                     cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
-                    cmd.Parameters.AddWithValue("@peran", cbPeran.SelectedItem.ToString());
-                    cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Data Berhasil Disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Sekarang aman karena sudah divalidasi di atas
+                    cmd.Parameters.AddWithValue("@peran", cbPeran.SelectedItem.ToString());
+
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Data Berhasil Disimpan!");
                     TampilkanData();
                 }
-                catch (Exception ex) { MessageBox.Show("Gagal Simpan: " + ex.Message); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal Simpan: " + ex.Message);
+                }
             }
         }
+
 
         // TOMBOL UPDATE (UPDATE)
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -153,12 +166,28 @@ namespace SI_ZAKAT
                     string query = "SELECT * FROM Tabel_Warga WHERE nama LIKE @cari OR NIK LIKE @cari";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@cari", "%" + txtCari.Text + "%");
+
                     DataTable dt = new DataTable();
                     dt.Load(cmd.ExecuteReader());
+
+                    // Pasang hasil ke tabel
                     dgvDataWarga.DataSource = dt;
+
+                    // Tambahkan Notifikasi di sini
+                    if (dt.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Data warga dengan nama atau NIK tersebut tidak ditemukan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Opsional: Refresh tabel ke data awal jika tidak ketemu
+                        TampilkanData();
+                    }
                 }
-                catch (Exception ex) { MessageBox.Show("Gagal Cari: " + ex.Message); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Terjadi kesalahan: " + ex.Message);
+                }
             }
         }
+
     }
 }

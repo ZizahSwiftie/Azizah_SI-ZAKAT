@@ -112,12 +112,16 @@
             // 
             // dgvDataWarga
             // 
+            this.dgvDataWarga.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDataWarga.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDataWarga.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDataWarga.Location = new System.Drawing.Point(654, 178);
+            this.dgvDataWarga.Location = new System.Drawing.Point(631, 178);
             this.dgvDataWarga.Name = "dgvDataWarga";
             this.dgvDataWarga.RowHeadersWidth = 62;
             this.dgvDataWarga.RowTemplate.Height = 28;
-            this.dgvDataWarga.Size = new System.Drawing.Size(690, 368);
+            this.dgvDataWarga.Size = new System.Drawing.Size(588, 368);
             this.dgvDataWarga.TabIndex = 7;
             this.dgvDataWarga.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataWarga_CellClick);
             // 
@@ -155,27 +159,28 @@
             this.groupBox1.Controls.Add(this.btnCari);
             this.groupBox1.Controls.Add(this.txtCari);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Location = new System.Drawing.Point(654, 76);
+            this.groupBox1.Location = new System.Drawing.Point(631, 76);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(690, 86);
+            this.groupBox1.Size = new System.Drawing.Size(588, 86);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pencarian";
             // 
             // btnCari
             // 
-            this.btnCari.Location = new System.Drawing.Point(587, 33);
+            this.btnCari.Location = new System.Drawing.Point(473, 33);
             this.btnCari.Name = "btnCari";
             this.btnCari.Size = new System.Drawing.Size(85, 39);
             this.btnCari.TabIndex = 2;
             this.btnCari.Text = "Cari";
             this.btnCari.UseVisualStyleBackColor = true;
+            this.btnCari.Click += new System.EventHandler(this.btnCari_Click);
             // 
             // txtCari
             // 
             this.txtCari.Location = new System.Drawing.Point(150, 39);
             this.txtCari.Name = "txtCari";
-            this.txtCari.Size = new System.Drawing.Size(419, 26);
+            this.txtCari.Size = new System.Drawing.Size(301, 26);
             this.txtCari.TabIndex = 1;
             // 
             // label5
@@ -238,6 +243,7 @@
             this.Controls.Add(this.dgvDataWarga);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataWarga)).EndInit();
             this.groupBox1.ResumeLayout(false);

@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SI_ZAKAT
 {
     public partial class FormDonasi : Form
     {
-        // 1. TAMBAHKAN INI (Deklarasi String Koneksi)
         string connectionString = @"Data Source=AZIZAH\AZIZAH;Initial Catalog=DB_SIZAKAT;Integrated Security=True";
 
         public FormDonasi()
@@ -21,83 +14,119 @@ namespace SI_ZAKAT
             InitializeComponent();
         }
 
-        // 2. TAMBAHKAN EVENT LOAD (Agar dropdown terisi otomatis saat form dibuka)
+        // --- STQA LAYER 1: Mengisi ID Donatur Otomatis dari Tabel Warga saat Form Terbuka ---
         private void FormDonasi_Load(object sender, EventArgs e)
-        {
-            LoadDonatur();
-
-            // Isi pilihan kategori secara manual jika belum diisi di designer
-            if (cbKategori.Items.Count == 0)
-            {
-                cbKategori.Items.Add("Zakat");
-                cbKategori.Items.Add("Infaq");
-                cbKategori.Items.Add("Sedekah");
-            }
-        }
-
-        public void LoadDonatur()
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
+                    // Mengambil NIK warga untuk dijadikan pilihan di ComboBox ID Donatur
                     string query = "SELECT NIK, nama FROM Tabel_Warga";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    cbDonatur.Items.Clear(); // Bersihkan dulu agar tidak double
-                    while (reader.Read())
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Menampilkan NIK - Nama di dropdown
-                        cbDonatur.Items.Add(reader["NIK"].ToString() + " - " + reader["nama"].ToString());
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            // Menambahkan NIK ke pilihan ComboBox
+                            cbIDDonatur.Items.Add(reader["NIK"].ToString());
+                        }
+                    }
+
+                    // Isi pilihan Kategori Zakat secara default
+                    cbKategori.Items.Add("Zakat Fitrah");
+                    cbKategori.Items.Add("Zakat Maal");
+                    cbKategori.Items.Add("Infaq/Sedekah");
+                    cbKategori.Items.Add("Bantuan Sembako");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal memuat data donatur: " + ex.Message, "Error Sistem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // --- STQA LAYER 2: Tombol Submit dengan Validasi Kelayakan Data ---
+        private void btnSubmitDonasi_Click(object sender, EventArgs e)
+        {
+            // 1. Validasi ComboBox ID Donatur tidak boleh kosong
+            if (cbIDDonatur.SelectedItem == null || cbIDDonatur.SelectedIndex == -1)
+            {
+                MessageBox.Show("Aturan STQA: Silakan pilih ID Donatur terlebih dahulu!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Validasi ComboBox Kategori tidak boleh kosong
+            if (cbKategori.SelectedItem == null || cbKategori.SelectedIndex == -1)
+            {
+                MessageBox.Show("Aturan STQA: Silakan pilih Kategori Donasi terlebih dahulu!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 3. Validasi Kolom Jumlah Uang tidak boleh kosong
+            if (string.IsNullOrWhiteSpace(txtJumlah.Text))
+            {
+                MessageBox.Show("Aturan STQA: Kolom Jumlah Uang wajib diisi!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtJumlah.Focus();
+                return;
+            }
+
+            // 4. Validasi Batas Nominal Uang (Minimal Donasi Rp 10.000 untuk menghindari data sampah)
+            int nominalDonasi = Convert.ToInt32(txtJumlah.Text.Trim());
+            if (nominalDonasi < 10000)
+            {
+                MessageBox.Show("Aturan STQA: Minimal nominal donasi yang dapat diproses adalah Rp 10.000!", "Validasi Nominal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtJumlah.Focus();
+                return;
+            }
+
+            // --- JIKA SEMUA VALIDASI AMAN, JALANKAN STORED PROCEDURE ---
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_InsertDonasi", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Binding parameter dengan aman menghindari SQL Injection
+                        cmd.Parameters.Add("@NIK_Warga", SqlDbType.Char, 16).Value = cbIDDonatur.SelectedItem.ToString();
+                        cmd.Parameters.Add("@Kategori", SqlDbType.VarChar, 50).Value = cbKategori.SelectedItem.ToString();
+                        cmd.Parameters.Add("@Jumlah", SqlDbType.Int).Value = nominalDonasi;
+                        cmd.Parameters.Add("@Tanggal", SqlDbType.Date).Value = dtpTanggal.Value.Date; // Membaca tanggal dari DateTimePicker
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Data Donasi Berhasil Disubmit!\nStatus saat ini: PENDING (Menunggu Validasi Admin)",
+                                        "Sukses STQA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        ClearForm();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Gagal memuat data donatur: " + ex.Message);
+                    MessageBox.Show("Gagal memproses transaksi donasi: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+        // --- STQA LAYER 3: Pengunci Keyboard agar Kolom Jumlah Hanya Bisa Diisi Angka ---
+        private void txtJumlah_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Validasi agar tidak error jika belum pilih donatur atau kategori
-            if (cbDonatur.SelectedItem == null || cbKategori.SelectedItem == null || string.IsNullOrEmpty(txtJumlah.Text))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                MessageBox.Show("Mohon lengkapi semua data donasi!", "Peringatan");
-                return;
+                e.Handled = true; // Tolak huruf/simbol
             }
+        }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-                    // Ambil NIK saja dari ComboBox (ambil string sebelum tanda "-")
-                    string nikDonatur = cbDonatur.SelectedItem.ToString().Split('-')[0].Trim();
-
-                    string query = "INSERT INTO Tabel_Donasi (nik_warga, kategori, jumlah, tanggal, status) " +
-                                   "VALUES (@nik, @kat, @jml, @tgl, @status)";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@nik", nikDonatur);
-                    cmd.Parameters.AddWithValue("@kat", cbKategori.SelectedItem.ToString());
-                    cmd.Parameters.AddWithValue("@jml", decimal.Parse(txtJumlah.Text));
-                    cmd.Parameters.AddWithValue("@tgl", dtpTanggal.Value);
-                    cmd.Parameters.AddWithValue("@status", "Pending");
-
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Donasi Berhasil Disubmit! Menunggu validasi admin.", "Sukses");
-
-                    // Kosongkan form setelah berhasil
-                    txtJumlah.Clear();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal Submit: " + ex.Message);
-                }
-            }
+        private void ClearForm()
+        {
+            cbIDDonatur.SelectedIndex = -1;
+            cbKategori.SelectedIndex = -1;
+            txtJumlah.Clear();
+            dtpTanggal.Value = DateTime.Now;
         }
     }
 }

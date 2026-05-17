@@ -237,21 +237,28 @@ namespace SI_ZAKAT
                 {
                     conn.Open();
 
-                    // AMAN: Menggunakan klausa parameter Like terstruktur, menutup celah bypass 'OR 1=1' 
-                    string query = "SELECT NIK, nama, alamat, peran FROM Tabel_Warga WHERE nama LIKE @cari OR NIK LIKE @cari";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    // POIN 1 UCP 2: Memanggil Stored Procedure untuk fitur Search
+                    using (SqlCommand cmd = new SqlCommand("sp_SearchWarga", conn))
                     {
-                        cmd.Parameters.Add("@cari", SqlDbType.VarChar, 100).Value = "%" + txtCari.Text.Trim() + "%";
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Masukkan parameter keyword pencarian
+                        cmd.Parameters.Add("@Keyword", SqlDbType.VarChar, 100).Value = txtCari.Text.Trim();
 
                         DataTable dt = new DataTable();
-                        dt.Load(cmd.ExecuteReader()); // Membaca data pencarian via DataReader [cite: 12]
-                        dgvDataWarga.DataSource = dt;
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            dt.Load(reader);
+                        }
+
+                        // Ikat hasil pencarian ke BindingSource agar DataGridView ter-refresh otomatis
+                        bsWarga.DataSource = dt;
+                        dgvDataWarga.DataSource = bsWarga;
 
                         if (dt.Rows.Count == 0)
                         {
-                            MessageBox.Show("Data warga dengan nama atau NIK tersebut tidak ditemukan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            TampilkanData(); // Tampilkan ulang data awal jika pencarian nihil
+                            MessageBox.Show("Data warga tidak ditemukan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            TampilkanData(); // Kembalikan ke data awal jika tidak ketemu
                         }
                     }
                 }

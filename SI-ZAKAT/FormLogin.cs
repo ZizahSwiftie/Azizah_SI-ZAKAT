@@ -43,8 +43,8 @@ namespace SI_ZAKAT
                 {
                     conn.Open();
 
-                    // 2. Query untuk mengambil Peran (agar bisa membedakan Admin dan User)
-                    string query = "SELECT peran FROM Tabel_Warga WHERE nama=@user AND password=@pass";
+                    // KODE YANG SENGAJA DIBUAT RENTAN (VULNERABLE) UNTUK KEPERLUAN DEMO UCP 2
+                    string query = "SELECT * FROM Tabel_Warga WHERE nama = '" + txtUsername.Text + "' AND password = '" + txtPassword.Text + "'";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {

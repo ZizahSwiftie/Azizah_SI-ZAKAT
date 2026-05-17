@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbDonatur = new System.Windows.Forms.ComboBox();
+            this.cbIDDonatur = new System.Windows.Forms.ComboBox();
             this.cbKategori = new System.Windows.Forms.ComboBox();
             this.txtJumlah = new System.Windows.Forms.TextBox();
             this.dtpTanggal = new System.Windows.Forms.DateTimePicker();
@@ -39,13 +39,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // cbDonatur
+            // cbIDDonatur
             // 
-            this.cbDonatur.FormattingEnabled = true;
-            this.cbDonatur.Location = new System.Drawing.Point(325, 57);
-            this.cbDonatur.Name = "cbDonatur";
-            this.cbDonatur.Size = new System.Drawing.Size(185, 28);
-            this.cbDonatur.TabIndex = 0;
+            this.cbIDDonatur.FormattingEnabled = true;
+            this.cbIDDonatur.Location = new System.Drawing.Point(325, 57);
+            this.cbIDDonatur.Name = "cbIDDonatur";
+            this.cbIDDonatur.Size = new System.Drawing.Size(185, 28);
+            this.cbIDDonatur.TabIndex = 0;
             // 
             // cbKategori
             // 
@@ -76,8 +76,6 @@
             this.btnSubmit.Size = new System.Drawing.Size(201, 42);
             this.btnSubmit.TabIndex = 4;
             this.btnSubmit.Text = "Submit Donasi";
-            this.btnSubmit.UseVisualStyleBackColor = true;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // label1
             // 
@@ -128,7 +126,7 @@
             this.Controls.Add(this.dtpTanggal);
             this.Controls.Add(this.txtJumlah);
             this.Controls.Add(this.cbKategori);
-            this.Controls.Add(this.cbDonatur);
+            this.Controls.Add(this.cbIDDonatur);
             this.Name = "FormDonasi";
             this.Text = "FormDonasi";
             this.Click += new System.EventHandler(this.FormDonasi_Load);
@@ -139,7 +137,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbDonatur;
+        private System.Windows.Forms.ComboBox cbIDDonatur;
         private System.Windows.Forms.ComboBox cbKategori;
         private System.Windows.Forms.TextBox txtJumlah;
         private System.Windows.Forms.DateTimePicker dtpTanggal;

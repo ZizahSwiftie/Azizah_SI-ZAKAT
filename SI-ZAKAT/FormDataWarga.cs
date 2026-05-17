@@ -27,8 +27,8 @@ namespace SI_ZAKAT
                 {
                     conn.Open(); // [cite: 67]
 
-                    // Mengambil data dari database menggunakan objek SqlCommand [cite: 12, 68]
-                    string query = "SELECT NIK, nama, alamat, peran FROM Tabel_Warga"; // [cite: 69]
+                    // Mengambil data dari database menggunakan objek SqlCommand 
+                    string query = "SELECT NIK, nama, alamat, peran FROM Tabel_Warga"; 
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -71,7 +71,7 @@ namespace SI_ZAKAT
             // @"^\d{16}$" artinya: teks harus berisi digit angka saja dari awal sampai akhir sepanjang 16 karakter
             if (!Regex.IsMatch(txtNIK.Text.Trim(), @"^\d{16}$"))
             {
-                MessageBox.Show("Aturan QA: Input NIK tidak valid! Masukan harus berupa angka saja dan tepat berjumlah 16 digit.",
+                MessageBox.Show("Input NIK tidak valid! Masukan harus berupa angka saja dan tepat berjumlah 16 digit.",
                                 "Validasi Format Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNIK.Focus();
                 return;
@@ -91,19 +91,19 @@ namespace SI_ZAKAT
                 {
                     conn.Open(); // [cite: 266]
 
-                    // Menggunakan Parameterized Query untuk mencegah ancaman SQL Injection sesuai Modul 9 [cite: 185, 515, 629]
-                    string sql = "INSERT INTO Tabel_Warga (NIK, nama, alamat, peran) VALUES (@nik, @nama, @alamat, @peran)"; // [cite: 636]
+                    // Menggunakan Parameterized Query untuk mencegah ancaman SQL Injection sesuai Modul 9
+                    string sql = "INSERT INTO Tabel_Warga (NIK, nama, alamat, peran) VALUES (@nik, @nama, @alamat, @peran)"; 
 
-                    using (SqlCommand cmd = new SqlCommand(sql, conn)) // [cite: 639]
+                    using (SqlCommand cmd = new SqlCommand(sql, conn)) 
                     {
                         // Mendefinisikan tipe data parameter secara eksplisit demi integritas database
-                        cmd.Parameters.Add("@nik", SqlDbType.Char, 16).Value = txtNIK.Text.Trim(); // [cite: 641]
-                        cmd.Parameters.Add("@nama", SqlDbType.VarChar, 100).Value = txtNama.Text.Trim(); // [cite: 642]
-                        cmd.Parameters.Add("@alamat", SqlDbType.VarChar, 200).Value = txtAlamat.Text.Trim(); // [cite: 645]
+                        cmd.Parameters.Add("@nik", SqlDbType.Char, 16).Value = txtNIK.Text.Trim(); 
+                        cmd.Parameters.Add("@nama", SqlDbType.VarChar, 100).Value = txtNama.Text.Trim(); 
+                        cmd.Parameters.Add("@alamat", SqlDbType.VarChar, 200).Value = txtAlamat.Text.Trim(); 
                         cmd.Parameters.Add("@peran", SqlDbType.VarChar, 20).Value = cbPeran.SelectedItem.ToString();
 
-                        // Sesuai Modul 4, ExecuteNonQuery mengembalikan jumlah baris yang terpengaruh (Integer) [cite: 105, 206]
-                        int rowsAffected = cmd.ExecuteNonQuery(); // [cite: 648]
+                        // Sesuai Modul 4, ExecuteNonQuery mengembalikan jumlah baris yang terpengaruh (Integer)
+                        int rowsAffected = cmd.ExecuteNonQuery(); 
 
                         if (rowsAffected > 0)
                         {
@@ -133,7 +133,7 @@ namespace SI_ZAKAT
                 // 1. Cek apakah alamat hanya diisi spasi doang
                 if (string.IsNullOrWhiteSpace(txtAlamat.Text))
                 {
-                    MessageBox.Show("Aturan STQA: Kolom Alamat wajib diisi dengan jelas dan tidak boleh hanya berisi spasi!",
+                    MessageBox.Show("Kolom Alamat wajib diisi dengan jelas!",
                                     "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtAlamat.Focus();
                     return;

@@ -91,18 +91,19 @@ namespace SI_ZAKAT
             {
                 try
                 {
-                    conn.Open(); // [cite: 266]
+                    conn.Open();
 
-                    // Menggunakan Parameterized Query untuk mencegah ancaman SQL Injection sesuai Modul 9
-                    string sql = "INSERT INTO Tabel_Warga (NIK, nama, alamat, peran) VALUES (@nik, @nama, @alamat, @peran)"; 
-
-                    using (SqlCommand cmd = new SqlCommand(sql, conn)) 
+                    // UBAH: Panggil nama Stored Procedure, bukan query INSERT manual
+                    using (SqlCommand cmd = new SqlCommand("sp_InsertWarga", conn))
                     {
-                        // Mendefinisikan tipe data parameter secara eksplisit demi integritas database
-                        cmd.Parameters.Add("@nik", SqlDbType.Char, 16).Value = txtNIK.Text.Trim(); 
-                        cmd.Parameters.Add("@nama", SqlDbType.VarChar, 100).Value = txtNama.Text.Trim(); 
-                        cmd.Parameters.Add("@alamat", SqlDbType.VarChar, 200).Value = txtAlamat.Text.Trim(); 
-                        cmd.Parameters.Add("@peran", SqlDbType.VarChar, 20).Value = cbPeran.SelectedItem.ToString();
+                        // WAJIB: Beritahu SqlCommand bahwa kita menggunakan Stored Procedure
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Parameter tetap sama seperti UCP 1
+                        cmd.Parameters.Add("@NIK", SqlDbType.Char, 16).Value = txtNIK.Text.Trim();
+                        cmd.Parameters.Add("@Nama", SqlDbType.VarChar, 100).Value = txtNama.Text.Trim();
+                        cmd.Parameters.Add("@Alamat", SqlDbType.VarChar, 200).Value = txtAlamat.Text.Trim();
+                        cmd.Parameters.Add("@Peran", SqlDbType.VarChar, 20).Value = cbPeran.SelectedItem.ToString();
 
                         // Sesuai Modul 4, ExecuteNonQuery mengembalikan jumlah baris yang terpengaruh (Integer)
                         int rowsAffected = cmd.ExecuteNonQuery(); 
@@ -164,18 +165,20 @@ namespace SI_ZAKAT
                 try
                 {
                     conn.Open();
-                    string sql = "UPDATE Tabel_Warga SET nama=@nama, alamat=@alamat, peran=@peran WHERE NIK=@nik";
 
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    // UBAH: Panggil Stored Procedure Update
+                    using (SqlCommand cmd = new SqlCommand("sp_UpdateWarga", conn))
                     {
-                        cmd.Parameters.Add("@nik", SqlDbType.Char, 16).Value = txtNIK.Text.Trim();
-                        cmd.Parameters.Add("@nama", SqlDbType.VarChar, 100).Value = txtNama.Text.Trim();
-                        cmd.Parameters.Add("@alamat", SqlDbType.VarChar, 200).Value = txtAlamat.Text.Trim();
-                        cmd.Parameters.Add("@peran", SqlDbType.VarChar, 20).Value = cbPeran.SelectedItem.ToString();
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.ExecuteNonQuery(); // Menjalankan query pembaruan data manipulasi [cite: 106, 209]
+                        cmd.Parameters.Add("@NIK", SqlDbType.Char, 16).Value = txtNIK.Text.Trim();
+                        cmd.Parameters.Add("@Nama", SqlDbType.VarChar, 100).Value = txtNama.Text.Trim();
+                        cmd.Parameters.Add("@Alamat", SqlDbType.VarChar, 200).Value = txtAlamat.Text.Trim();
+                        cmd.Parameters.Add("@Peran", SqlDbType.VarChar, 20).Value = cbPeran.SelectedItem.ToString();
 
-                        MessageBox.Show("Data warga berhasil diperbarui!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Data warga berhasil diperbarui via Stored Procedure!", "Sukses UCP 2", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearForm();
                         TampilkanData();
                     }
@@ -185,7 +188,6 @@ namespace SI_ZAKAT
                     MessageBox.Show("Gagal memperbarui data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
 
         // =========================================================================
         // 4. TOMBOL DELETE (DELETE)

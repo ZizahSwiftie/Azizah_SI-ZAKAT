@@ -66,7 +66,6 @@
             this.label3.Size = new System.Drawing.Size(61, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Barang";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 

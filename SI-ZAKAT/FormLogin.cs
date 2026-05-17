@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-// 1. WAJIB tambahkan namespace ini
+
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Drawing;

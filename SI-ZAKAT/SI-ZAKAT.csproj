@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -137,6 +138,24 @@
   <ItemGroup>
     <None Include="README.md" />
     <None Include="Resources\ChatGPT Image Apr 17, 2026, 03_30_35 PM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo si zakat.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\total donasi.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stok barang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\penyalutran.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2026-05-18 033125.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warga.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

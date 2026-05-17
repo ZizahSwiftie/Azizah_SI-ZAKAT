@@ -73,7 +73,7 @@ namespace SI_ZAKAT
                                 {
                                     // Jika dia Muzakki/User biasa, arahkan ke dashboard user
                                     // Pastikan kamu punya form bernama FormDashboard atau sesuaikan namanya
-                                    FormDashboard formUser = new FormDashboard();
+                                    LoadDashboardData formUser = new LoadDashboardData();
                                     formUser.Show();
                                 }
                             }

@@ -19,38 +19,40 @@ namespace SI_ZAKAT
         // =========================================================================
         // 1. FUNGSI READ (MENAMPILKAN DATA) - Menggunakan SqlDataReader (Connected Mode)
         // =========================================================================
+        BindingSource bsWarga = new BindingSource();
+
         public void TampilkanData()
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
-                    conn.Open(); // [cite: 67]
+                    conn.Open();
 
-                    // Mengambil data dari database menggunakan objek SqlCommand 
-                    string query = "SELECT NIK, nama, alamat, peran FROM Tabel_Warga"; 
+                    // POIN 2 UCP 2: Membaca data dari objek VIEW (vw_DaftarWarga), bukan tabel langsung
+                    string query = "SELECT * FROM vw_DaftarWarga";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Sesuai Modul 6, menggunakan ExecuteReader karena mengambil banyak data
-                        using (SqlDataReader reader = cmd.ExecuteReader()) 
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             DataTable dt = new DataTable();
-                            dt.Load(reader); // Membaca stream data baris demi baris ke DataTable
-                            dgvDataWarga.DataSource = dt;
+                            dt.Load(reader);
+
+                            // POIN 4 UCP 2: Manfaatkan Binding dalam DataGridView
+                            bsWarga.DataSource = dt;
+                            dgvDataWarga.DataSource = bsWarga;
+
+                            // POIN 5 UCP 2: Hubungkan Binding Navigator dengan BindingSource
+                            bindingNavigator1.BindingSource = bsWarga;
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Gagal memuat data warga: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Gagal memuat data dengan sistem binding: " + ex.Message, "Error QA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            TampilkanData(); // Otomatis muat data saat aplikasi pertama kali dibuka
         }
 
         // =========================================================================

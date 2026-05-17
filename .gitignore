@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SI-ZAKAT/FormDataWarga.cs
+/SI-ZAKAT/FormDataWarga.Designer.cs
+/SI-ZAKAT/FormDataWarga.resx

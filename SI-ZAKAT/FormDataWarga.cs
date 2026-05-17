@@ -188,6 +188,7 @@ namespace SI_ZAKAT
                     MessageBox.Show("Gagal memperbarui data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
 
         // =========================================================================
         // 4. TOMBOL DELETE (DELETE)
@@ -203,14 +204,16 @@ namespace SI_ZAKAT
                     try
                     {
                         conn.Open();
-                        string sql = "DELETE FROM Tabel_Warga WHERE NIK=@nik";
 
-                        using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        // UBAH: Panggil Stored Procedure Delete
+                        using (SqlCommand cmd = new SqlCommand("sp_DeleteWarga", conn))
                         {
-                            cmd.Parameters.Add("@nik", SqlDbType.Char, 16).Value = txtNIK.Text.Trim();
-                            cmd.ExecuteNonQuery(); // Menjalankan query penghapusan [cite: 106, 223]
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@NIK", SqlDbType.Char, 16).Value = txtNIK.Text.Trim();
 
-                            MessageBox.Show("Data warga berhasil dihapus dari sistem!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            cmd.ExecuteNonQuery();
+
+                            MessageBox.Show("Data warga berhasil dihapus via Stored Procedure!", "Sukses UCP 2", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ClearForm();
                             TampilkanData();
                         }

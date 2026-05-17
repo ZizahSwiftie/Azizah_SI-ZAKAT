@@ -95,7 +95,10 @@ namespace SI_ZAKAT
             panelKonten_Paint(new FormDonasi());
         }
 
-
+        private void btnStokSembako_Click(object sender, EventArgs e)
+        {
+            panelKonten_Paint(new FormStokSembako());
+        }
     }
     } // SOLUSI ERROR 2: Kurung kurawal tutup untuk Class FormDashboard
 } // Kurung kurawal tutup untuk Namespace SI_ZAKAT

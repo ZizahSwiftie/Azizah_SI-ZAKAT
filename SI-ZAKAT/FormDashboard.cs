@@ -66,6 +66,8 @@ namespace SI_ZAKAT
             panelKonten_Paint(new FormDataWarga());
         }
 
+
+
         private void panelKonten_Paint(Form formAnak)
         {
             // 1. Bersihkan panel dari form yang terbuka sebelumnya agar tidak bertumpuk
@@ -87,6 +89,13 @@ namespace SI_ZAKAT
             // 6. Tampilkan form anak di dalam panel
             formAnak.Show();
         }
+
+        private void btnDonasi_Click(object sender, EventArgs e)
+        {
+            panelKonten_Paint(new FormDonasi());
+        }
+
+
     }
     } // SOLUSI ERROR 2: Kurung kurawal tutup untuk Class FormDashboard
 } // Kurung kurawal tutup untuk Namespace SI_ZAKAT

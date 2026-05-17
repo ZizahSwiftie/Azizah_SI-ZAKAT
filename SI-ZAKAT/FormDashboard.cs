@@ -26,6 +26,7 @@ namespace SI_ZAKAT
         private void FormDashboard_Load(object sender, EventArgs e)
         {
             LoadDashboard();
+            panelKonten_Paint(new FormDashboard());
         }
 
         // SOLUSI ERROR 3: Membuat fungsi mandiri yang rapi dan terpisah dari event klik label
@@ -65,7 +66,6 @@ namespace SI_ZAKAT
         {
             panelKonten_Paint(new FormDataWarga());
         }
-
 
 
         private void panelKonten_Paint(Form formAnak)

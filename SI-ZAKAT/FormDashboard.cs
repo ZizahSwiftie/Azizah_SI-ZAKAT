@@ -63,7 +63,7 @@ namespace SI_ZAKAT
 
         private void btnDataWarga_Click(object sender, EventArgs e)
         {
-
+            panelKonten_Paint(new FormDataWarga());
         }
 
         private void panelKonten_Paint(Form formAnak)

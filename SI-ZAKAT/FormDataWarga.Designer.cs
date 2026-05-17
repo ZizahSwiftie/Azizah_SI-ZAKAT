@@ -57,6 +57,7 @@
             this.txtNIK.Name = "txtNIK";
             this.txtNIK.Size = new System.Drawing.Size(267, 26);
             this.txtNIK.TabIndex = 0;
+            this.txtNIK.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNIK_KeyPress);
             // 
             // txtNama
             // 
@@ -232,7 +233,7 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Input Data";
             // 
-            // Form1
+            // FormDataWarga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -241,7 +242,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnTampilkanData);
             this.Controls.Add(this.dgvDataWarga);
-            this.Name = "Form1";
+            this.Name = "FormDataWarga";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.Form1_Load);

@@ -263,5 +263,15 @@ namespace SI_ZAKAT
             cbPeran.SelectedIndex = -1;
             txtNIK.Focus();
         }
+
+        private void txtNIK_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Cek jika karakter yang ditekan bukan angka, dan bukan tombol Backspace (untuk menghapus)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Tolak mentah-mentah karakter tersebut agar tidak muncul di TextBox
+            }
+        }
+    }
     }
 }

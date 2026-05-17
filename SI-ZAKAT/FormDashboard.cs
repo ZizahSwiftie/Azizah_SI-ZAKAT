@@ -60,5 +60,33 @@ namespace SI_ZAKAT
                 }
             }
         }
+
+        private void btnDataWarga_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelKonten_Paint(Form formAnak)
+        {
+            // 1. Bersihkan panel dari form yang terbuka sebelumnya agar tidak bertumpuk
+            panelKonten.Controls.Clear();
+
+            // 2. KUNCI SUKSES: Ubah properti TopLevel menjadi false agar form bisa masuk ke dalam panel
+            formAnak.TopLevel = false;
+
+            // 3. Tambahan Estetik: Hilangkan garis border/bingkai bawaan form anak
+            formAnak.FormBorderStyle = FormBorderStyle.None;
+
+            // 4. Atur agar ukuran form anak otomatis memenuhi seluruh area panelKonten
+            formAnak.Dock = DockStyle.Fill;
+
+            // 5. Masukkan form anak ke dalam daftar kontrol panelKonten
+            panelKonten.Controls.Add(formAnak);
+            panelKonten.Tag = formAnak;
+
+            // 6. Tampilkan form anak di dalam panel
+            formAnak.Show();
+        }
+    }
     } // SOLUSI ERROR 2: Kurung kurawal tutup untuk Class FormDashboard
 } // Kurung kurawal tutup untuk Namespace SI_ZAKAT

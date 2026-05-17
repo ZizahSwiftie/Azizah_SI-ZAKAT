@@ -27,13 +27,13 @@ namespace SI_ZAKAT
                 {
                     conn.Open(); // [cite: 67]
 
-                    [cite_start]// Mengambil data dari database menggunakan objek SqlCommand [cite: 12, 68]
+                    // Mengambil data dari database menggunakan objek SqlCommand [cite: 12, 68]
                     string query = "SELECT NIK, nama, alamat, peran FROM Tabel_Warga"; // [cite: 69]
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        [cite_start]// Sesuai Modul 6, menggunakan ExecuteReader karena mengambil banyak data [cite: 12, 105]
-                        [cite_start] using (SqlDataReader reader = cmd.ExecuteReader()) // [cite: 12, 70]
+                        // Sesuai Modul 6, menggunakan ExecuteReader karena mengambil banyak data
+                        using (SqlDataReader reader = cmd.ExecuteReader()) 
                         {
                             DataTable dt = new DataTable();
                             dt.Load(reader); // Membaca stream data baris demi baris ke DataTable
@@ -91,10 +91,10 @@ namespace SI_ZAKAT
                 {
                     conn.Open(); // [cite: 266]
 
-                    [cite_start]// Menggunakan Parameterized Query untuk mencegah ancaman SQL Injection sesuai Modul 9 [cite: 185, 515, 629]
+                    // Menggunakan Parameterized Query untuk mencegah ancaman SQL Injection sesuai Modul 9 [cite: 185, 515, 629]
                     string sql = "INSERT INTO Tabel_Warga (NIK, nama, alamat, peran) VALUES (@nik, @nama, @alamat, @peran)"; // [cite: 636]
 
-                    [cite_start] using (SqlCommand cmd = new SqlCommand(sql, conn)) // [cite: 639]
+                    using (SqlCommand cmd = new SqlCommand(sql, conn)) // [cite: 639]
                     {
                         // Mendefinisikan tipe data parameter secara eksplisit demi integritas database
                         cmd.Parameters.Add("@nik", SqlDbType.Char, 16).Value = txtNIK.Text.Trim(); // [cite: 641]
@@ -102,7 +102,7 @@ namespace SI_ZAKAT
                         cmd.Parameters.Add("@alamat", SqlDbType.VarChar, 200).Value = txtAlamat.Text.Trim(); // [cite: 645]
                         cmd.Parameters.Add("@peran", SqlDbType.VarChar, 20).Value = cbPeran.SelectedItem.ToString();
 
-                        [cite_start]// Sesuai Modul 4, ExecuteNonQuery mengembalikan jumlah baris yang terpengaruh (Integer) [cite: 105, 206]
+                        // Sesuai Modul 4, ExecuteNonQuery mengembalikan jumlah baris yang terpengaruh (Integer) [cite: 105, 206]
                         int rowsAffected = cmd.ExecuteNonQuery(); // [cite: 648]
 
                         if (rowsAffected > 0)
@@ -128,6 +128,24 @@ namespace SI_ZAKAT
                 catch (Exception ex)
                 {
                     MessageBox.Show("Terjadi kesalahan sistem: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                // --- VALIDASI QA: Proteksi Kolom Alamat ---
+                // 1. Cek apakah alamat hanya diisi spasi doang
+                if (string.IsNullOrWhiteSpace(txtAlamat.Text))
+                {
+                    MessageBox.Show("Aturan STQA: Kolom Alamat wajib diisi dengan jelas dan tidak boleh hanya berisi spasi!",
+                                    "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtAlamat.Focus();
+                    return;
+                }
+
+                // 2. Cek batas panjang karakter agar tidak melebihi kapasitas database (VarChar 200)
+                if (txtAlamat.Text.Length > 200)
+                {
+                    MessageBox.Show("Aturan STQA: Alamat terlalu panjang! Maksimal pengisian adalah 200 karakter.",
+                                    "Validasi Batas Karakter", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtAlamat.Focus();
+                    return;
                 }
             }
         }
@@ -212,7 +230,7 @@ namespace SI_ZAKAT
                 {
                     conn.Open();
 
-                    [cite_start]// AMAN: Menggunakan klausa parameter Like terstruktur, menutup celah bypass 'OR 1=1' [cite: 697, 717]
+                    // AMAN: Menggunakan klausa parameter Like terstruktur, menutup celah bypass 'OR 1=1' 
                     string query = "SELECT NIK, nama, alamat, peran FROM Tabel_Warga WHERE nama LIKE @cari OR NIK LIKE @cari";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -272,6 +290,5 @@ namespace SI_ZAKAT
                 e.Handled = true; // Tolak mentah-mentah karakter tersebut agar tidak muncul di TextBox
             }
         }
-    }
     }
 }

@@ -38,6 +38,8 @@
             this.dtpTanggal = new System.Windows.Forms.DateTimePicker();
             this.cbBarang = new System.Windows.Forms.ComboBox();
             this.cbMustahik = new System.Windows.Forms.ComboBox();
+            this.lblStokBeras = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -86,12 +88,13 @@
             // 
             // btnSalur
             // 
-            this.btnSalur.Location = new System.Drawing.Point(278, 305);
+            this.btnSalur.Location = new System.Drawing.Point(282, 290);
             this.btnSalur.Name = "btnSalur";
             this.btnSalur.Size = new System.Drawing.Size(236, 41);
             this.btnSalur.TabIndex = 5;
             this.btnSalur.Text = "Salurkan Bantuan";
             this.btnSalur.UseVisualStyleBackColor = true;
+            this.btnSalur.Click += new System.EventHandler(this.btnSalurkan_Click);
             // 
             // txtJumlah
             // 
@@ -99,6 +102,7 @@
             this.txtJumlah.Name = "txtJumlah";
             this.txtJumlah.Size = new System.Drawing.Size(264, 26);
             this.txtJumlah.TabIndex = 7;
+            this.txtJumlah.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtJumlahKeluar_KeyPress);
             // 
             // dtpTanggal
             // 
@@ -114,6 +118,7 @@
             this.cbBarang.Name = "cbBarang";
             this.cbBarang.Size = new System.Drawing.Size(264, 28);
             this.cbBarang.TabIndex = 9;
+            this.cbBarang.SelectedIndexChanged += new System.EventHandler(this.cbBarang_SelectedIndexChanged);
             // 
             // cbMustahik
             // 
@@ -123,11 +128,35 @@
             this.cbMustahik.Size = new System.Drawing.Size(264, 28);
             this.cbMustahik.TabIndex = 10;
             // 
+            // lblStokBeras
+            // 
+            this.lblStokBeras.AutoSize = true;
+            this.lblStokBeras.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblStokBeras.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStokBeras.Location = new System.Drawing.Point(277, 365);
+            this.lblStokBeras.Name = "lblStokBeras";
+            this.lblStokBeras.Size = new System.Drawing.Size(213, 25);
+            this.lblStokBeras.TabIndex = 11;
+            this.lblStokBeras.Text = "Hitung Stok Terbaru:";
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.SystemColors.Info;
+            this.btnBack.Location = new System.Drawing.Point(34, 28);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(112, 39);
+            this.btnBack.TabIndex = 12;
+            this.btnBack.Text = "< Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // FormPenyaluran
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.lblStokBeras);
             this.Controls.Add(this.cbMustahik);
             this.Controls.Add(this.cbBarang);
             this.Controls.Add(this.dtpTanggal);
@@ -139,7 +168,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormPenyaluran";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormPenyaluran";
+            this.Load += new System.EventHandler(this.FormPenyaluran_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -157,5 +188,7 @@
         private System.Windows.Forms.DateTimePicker dtpTanggal;
         private System.Windows.Forms.ComboBox cbBarang;
         private System.Windows.Forms.ComboBox cbMustahik;
+        private System.Windows.Forms.Label lblStokBeras;
+        private System.Windows.Forms.Button btnBack;
     }
 }

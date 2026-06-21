@@ -14,74 +14,156 @@ namespace SI_ZAKAT
             InitializeComponent();
         }
 
-        // --- STQA LAYER 1: Mengisi ID Donatur Otomatis dari Tabel Warga saat Form Terbuka ---
+        // =========================================================================
+        // LOAD — isi ComboBox & setting DateTimePicker
+        // =========================================================================
         private void FormDonasi_Load(object sender, EventArgs e)
         {
+            // --- SETTING DATETIMEPICKER ---
+            // Format tampilan: dd/MM/yyyy (misal: 21/06/2026)
+            dtpTanggal.Format = DateTimePickerFormat.Custom;
+            dtpTanggal.CustomFormat = "dd/MM/yyyy";
+
+            // Batasi tanggal: minimal 1 Januari tahun ini, maksimal hari ini
+            // Cegah user pilih tanggal masa depan atau tahun tidak masuk akal
+            dtpTanggal.MinDate = new DateTime(DateTime.Now.Year, 1, 1);
+            dtpTanggal.MaxDate = DateTime.Now;
+            dtpTanggal.Value = DateTime.Now; // Default = hari ini
+
+            // --- ISI COMBOBOX ID DONATUR dari Tabel_Warga ---
+            // Tampil format "NIK - Nama" agar user tahu memilih siapa
+            LoadDonatur();
+
+            // --- ISI COMBOBOX KATEGORI (statis, tidak bisa diketik manual) ---
+            cbKategori.DropDownStyle = ComboBoxStyle.DropDownList; // Hanya pilih, tidak bisa ketik
+            cbKategori.Items.Clear();
+            cbKategori.Items.Add("Zakat Fitrah");
+            cbKategori.Items.Add("Zakat Maal");
+            cbKategori.Items.Add("Infaq");
+            cbKategori.Items.Add("Sedekah");
+            cbKategori.Items.Add("Fidyah");
+            cbKategori.Items.Add("Bantuan Sembako");
+        }
+
+        // =========================================================================
+        // LOAD DONATUR — tampil "NIK - Nama" di ComboBox
+        // =========================================================================
+        private void LoadDonatur()
+        {
+            cbIDDonatur.DropDownStyle = ComboBoxStyle.DropDownList; // Hanya pilih, tidak bisa ketik
+            cbIDDonatur.Items.Clear();
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
-                    // Mengambil NIK warga untuk dijadikan pilihan di ComboBox ID Donatur
-                    string query = "SELECT NIK, nama FROM Tabel_Warga";
+                    // Ambil NIK + nama, hanya warga dengan peran Muzakki (pemberi zakat)
+                    // Jika semua warga boleh donasi, hapus WHERE peran='Muzakki'
+                    string query = "SELECT NIK, nama FROM Tabel_Warga WHERE peran = 'Muzakki' ORDER BY nama";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            // Menambahkan NIK ke pilihan ComboBox
-                            cbIDDonatur.Items.Add(reader["NIK"].ToString());
+                            string nik = reader["NIK"].ToString().Trim();
+                            string nama = reader["nama"].ToString().Trim();
+                            // Format tampilan: "NIK - Nama" supaya user tahu pilih siapa
+                            cbIDDonatur.Items.Add($"{nik} - {nama}");
                         }
                     }
 
-                    // Isi pilihan Kategori Zakat secara default
-                    cbKategori.Items.Add("Zakat Fitrah");
-                    cbKategori.Items.Add("Zakat Maal");
-                    cbKategori.Items.Add("Infaq/Sedekah");
-                    cbKategori.Items.Add("Bantuan Sembako");
+                    if (cbIDDonatur.Items.Count == 0)
+                        MessageBox.Show("Belum ada data Muzakki terdaftar.\nSilakan daftarkan warga terlebih dahulu.",
+                            "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Gagal memuat data donatur: " + ex.Message, "Error Sistem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Gagal memuat data donatur:\n" + ex.Message,
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        // --- STQA LAYER 2: Tombol Submit dengan Validasi Kelayakan Data ---
-        private void btnSubmitDonasi_Click(object sender, EventArgs e)
+        // =========================================================================
+        // KEYPRESS JUMLAH — hanya angka, cegah crash Convert.ToInt32
+        // =========================================================================
+        private void txtJumlah_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 1. Validasi ComboBox ID Donatur tidak boleh kosong
-            if (cbIDDonatur.SelectedItem == null || cbIDDonatur.SelectedIndex == -1)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        // =========================================================================
+        // VALIDASI TERPUSAT
+        // =========================================================================
+        private bool ValidasiInput(out long jumlah)
+        {
+            jumlah = 0;
+
+            // Cek ID Donatur dipilih
+            if (cbIDDonatur.SelectedIndex == -1)
             {
-                MessageBox.Show("Aturan STQA: Silakan pilih ID Donatur terlebih dahulu!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("Silakan pilih ID Donatur terlebih dahulu.",
+                    "Data Tidak Valid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbIDDonatur.Focus(); return false;
             }
 
-            // 2. Validasi ComboBox Kategori tidak boleh kosong
-            if (cbKategori.SelectedItem == null || cbKategori.SelectedIndex == -1)
+            // Cek Kategori dipilih
+            if (cbKategori.SelectedIndex == -1)
             {
-                MessageBox.Show("Aturan STQA: Silakan pilih Kategori Donasi terlebih dahulu!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("Silakan pilih Kategori Donasi terlebih dahulu.",
+                    "Data Tidak Valid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbKategori.Focus(); return false;
             }
 
-            // 3. Validasi Kolom Jumlah Uang tidak boleh kosong
+            // Cek Jumlah tidak kosong
             if (string.IsNullOrWhiteSpace(txtJumlah.Text))
             {
-                MessageBox.Show("Aturan STQA: Kolom Jumlah Uang wajib diisi!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtJumlah.Focus();
-                return;
+                MessageBox.Show("Jumlah donasi wajib diisi.",
+                    "Data Tidak Valid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtJumlah.Focus(); return false;
             }
 
-            // 4. Validasi Batas Nominal Uang (Minimal Donasi Rp 10.000 untuk menghindari data sampah)
-            int nominalDonasi = Convert.ToInt32(txtJumlah.Text.Trim());
-            if (nominalDonasi < 10000)
+            // Cek Jumlah adalah angka valid (cegah crash)
+            if (!long.TryParse(txtJumlah.Text.Trim(), out jumlah))
             {
-                MessageBox.Show("Aturan STQA: Minimal nominal donasi yang dapat diproses adalah Rp 10.000!", "Validasi Nominal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtJumlah.Focus();
-                return;
+                MessageBox.Show("Jumlah donasi harus berupa angka.",
+                    "Data Tidak Valid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtJumlah.Focus(); return false;
             }
 
-            // --- JIKA SEMUA VALIDASI AMAN, JALANKAN STORED PROCEDURE ---
+            // Cek minimal donasi Rp 10.000
+            if (jumlah < 10000)
+            {
+                MessageBox.Show("Minimal nominal donasi adalah Rp 10.000.",
+                    "Data Tidak Valid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtJumlah.Focus(); return false;
+            }
+
+            // Cek tanggal tidak melebihi hari ini (double-check, sudah dibatasi MaxDate)
+            if (dtpTanggal.Value.Date > DateTime.Now.Date)
+            {
+                MessageBox.Show("Tanggal donasi tidak boleh melebihi hari ini.",
+                    "Data Tidak Valid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpTanggal.Focus(); return false;
+            }
+
+            return true;
+        }
+
+        // =========================================================================
+        // TOMBOL SUBMIT DONASI
+        // =========================================================================
+        private void btnSubmitDonasi_Click(object sender, EventArgs e)
+        {
+            if (!ValidasiInput(out long jumlah)) return;
+
+            // Ambil NIK saja dari pilihan "NIK - Nama"
+            // Format: "1234567890123456 - Budi" → split di " - " → ambil bagian pertama
+            string pilihan = cbIDDonatur.SelectedItem.ToString();
+            string nik = pilihan.Split(new string[] { " - " }, StringSplitOptions.None)[0].Trim();
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
@@ -90,35 +172,63 @@ namespace SI_ZAKAT
                     using (SqlCommand cmd = new SqlCommand("sp_InsertDonasi", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-
-                        // Binding parameter dengan aman menghindari SQL Injection
-                        cmd.Parameters.Add("@NIK_Warga", SqlDbType.Char, 16).Value = cbIDDonatur.SelectedItem.ToString();
+                        cmd.Parameters.Add("@NIK_Warga", SqlDbType.Char, 16).Value = nik;
                         cmd.Parameters.Add("@Kategori", SqlDbType.VarChar, 50).Value = cbKategori.SelectedItem.ToString();
-                        cmd.Parameters.Add("@Jumlah", SqlDbType.Int).Value = nominalDonasi;
-                        cmd.Parameters.Add("@Tanggal", SqlDbType.Date).Value = dtpTanggal.Value.Date; // Membaca tanggal dari DateTimePicker
-
+                        cmd.Parameters.Add("@Jumlah", SqlDbType.BigInt).Value = jumlah;
+                        cmd.Parameters.Add("@Tanggal", SqlDbType.Date).Value = dtpTanggal.Value.Date;
                         cmd.ExecuteNonQuery();
-
-                        MessageBox.Show("Data Donasi Berhasil Disubmit!\nStatus saat ini: PENDING (Menunggu Validasi Admin)",
-                                        "Sukses STQA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        ClearForm();
                     }
+
+                    MessageBox.Show(
+                        "Donasi berhasil disubmit!\n\n" +
+                        $"Donatur  : {pilihan}\n" +
+                        $"Kategori : {cbKategori.SelectedItem}\n" +
+                        $"Jumlah   : Rp {jumlah:N0}\n" +
+                        $"Tanggal  : {dtpTanggal.Value:dd/MM/yyyy}\n\n" +
+                        "Status: PENDING — menunggu validasi Admin.",
+                        "Submit Berhasil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    ClearForm();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Gagal memproses transaksi donasi: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Gagal memproses donasi:\n" + ex.Message,
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        // --- STQA LAYER 3: Pengunci Keyboard agar Kolom Jumlah Hanya Bisa Diisi Angka ---
-        private void txtJumlah_KeyPress(object sender, KeyPressEventArgs e)
+        // =========================================================================
+        // LIHAT RIWAYAT DONASI
+        // =========================================================================
+        private void btnRiwayat_Click(object sender, EventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            // Validasi: donatur harus dipilih dulu sebelum lihat riwayat
+            if (cbIDDonatur.SelectedIndex == -1)
             {
-                e.Handled = true; // Tolak huruf/simbol
+                MessageBox.Show("Pilih ID Donatur terlebih dahulu untuk melihat riwayatnya.",
+                    "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbIDDonatur.Focus();
+                return;
             }
+
+            // Ambil NIK dari pilihan "NIK - Nama"
+            string pilihan = cbIDDonatur.SelectedItem.ToString();
+            string nik = pilihan.Split(new string[] { " - " }, StringSplitOptions.None)[0].Trim();
+
+            // Buka FormRiwayat, kirim NIK via property (bukan constructor)
+            FormRiwayat formRiwayat = new FormRiwayat();
+            formRiwayat.NikDonatur = nik;
+            formRiwayat.ShowDialog();
+        }
+
+        // =========================================================================
+        // BACK & CLEAR
+        // =========================================================================
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void ClearForm()
@@ -127,6 +237,7 @@ namespace SI_ZAKAT
             cbKategori.SelectedIndex = -1;
             txtJumlah.Clear();
             dtpTanggal.Value = DateTime.Now;
+            cbIDDonatur.Focus();
         }
     }
 }

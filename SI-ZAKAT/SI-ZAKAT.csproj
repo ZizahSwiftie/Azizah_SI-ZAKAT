@@ -77,17 +77,17 @@
     <Compile Include="FormPenyaluran.Designer.cs">
       <DependentUpon>FormPenyaluran.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormRiwayatDonasi.cs">
+    <Compile Include="FormRiwayat.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormRiwayatDonasi.Designer.cs">
-      <DependentUpon>FormRiwayatDonasi.cs</DependentUpon>
     </Compile>
     <Compile Include="FormStokSembako.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormStokSembako.Designer.cs">
       <DependentUpon>FormStokSembako.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormValidasi.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,11 +106,14 @@
     <EmbeddedResource Include="FormPenyaluran.resx">
       <DependentUpon>FormPenyaluran.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormRiwayatDonasi.resx">
-      <DependentUpon>FormRiwayatDonasi.cs</DependentUpon>
+    <EmbeddedResource Include="FormRiwayat.resx">
+      <DependentUpon>FormRiwayat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormStokSembako.resx">
       <DependentUpon>FormStokSembako.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormValidasi.resx">
+      <DependentUpon>FormValidasi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -156,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\warga.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo si zakat1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

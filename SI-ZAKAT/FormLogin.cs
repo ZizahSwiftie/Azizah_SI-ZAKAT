@@ -1,105 +1,171 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
-using System.Drawing;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SI_ZAKAT
 {
     public partial class FormLogin : Form
     {
-        // 2. Atur String Koneksi (Sesuaikan "Data Source" dengan nama server SQL kamu)
-        // Jika pakai SQL Express biasanya: @"Data Source=.\SQLEXPRESS;Initial Catalog=DB_SIZAKAT;Integrated Security=True"
         string connectionString = @"Data Source=AZIZAH\AZIZAH;Initial Catalog=DB_SIZAKAT;Integrated Security=True";
 
         public FormLogin()
         {
             InitializeComponent();
-            // Set password agar tersembunyi saat pertama buka
+
+            // Password disembunyikan saat form dibuka
             txtPassword.UseSystemPasswordChar = true;
         }
 
+        // Show / Hide Password
+        private void chkShow_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = !chkShow.Checked;
+        }
+
+        // Tombol Login
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // 1. Validasi Input Kosong
-            if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+            
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
             {
-                MessageBox.Show("Username dan Password tidak boleh kosong!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Username wajib diisi!",
+                    "Validasi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtUsername.Focus();
                 return;
             }
 
-            try
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                // Gunakan blok using agar koneksi otomatis tertutup jika terjadi error
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                MessageBox.Show(
+                    "Password wajib diisi!",
+                    "Validasi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtPassword.Focus();
+                return;
+            }
+
+            if (txtPassword.Text.Length < 8)
+            {
+                MessageBox.Show(
+                    "Password minimal 8 karakter!",
+                    "Validasi Password",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtPassword.Focus();
+                return;
+            }
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
                 {
                     conn.Open();
 
-                    // KODE YANG SENGAJA DIBUAT RENTAN (VULNERABLE) UNTUK KEPERLUAN DEMO UCP 2
-                    string query = "SELECT * FROM Tabel_Warga WHERE nama = '" + txtUsername.Text + "' AND password = '" + txtPassword.Text + "'";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    // Menggunakan Stored Procedure
+                    using (SqlCommand cmd = new SqlCommand("sp_Login", conn))
                     {
-                        cmd.Parameters.AddWithValue("@user", txtUsername.Text);
-                        cmd.Parameters.AddWithValue("@pass", txtPassword.Text);
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                        // Menggunakan ExecuteReader karena kita butuh membaca nilai kolom 'peran'
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        // Parameterized Query
+                        // Aman dari SQL Injection
+                        cmd.Parameters.Add(
+                            "@Username",
+                            SqlDbType.VarChar,
+                            100).Value = txtUsername.Text.Trim();
+
+                        cmd.Parameters.Add(
+                            "@Password",
+                            SqlDbType.VarChar,
+                            100).Value = txtPassword.Text.Trim();
+
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
                         {
-                            if (reader.Read()) // Jika data ditemukan
+                            string role = result.ToString();
+
+                            MessageBox.Show(
+                                "Login berhasil sebagai " + role,
+                                "Sukses",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                            this.Hide();
+
+                            // Role Based Access
+                            if (role == "Admin" || role == "Petugas")
                             {
-                                string peran = reader["peran"].ToString();
+                                FormDashboard dashboard =
+                                    new FormDashboard();
 
-                                MessageBox.Show("Login Berhasil! Selamat Datang " + peran, "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                                // 3. PINDAH KE FORM SESUAI PERAN
-                                this.Hide();
-
-                                if (peran == "Admin")
-                                {
-                                    // Pastikan nama form kamu adalah FormDataWarga atau ganti sesuai nama form Adminmu
-                                    FormDataWarga formAdmin = new FormDataWarga();
-                                    formAdmin.Show();
-                                }
-                                else
-                                {
-                                    // Jika dia Muzakki/User biasa, arahkan ke dashboard user
-                                    // Pastikan kamu punya form bernama FormDashboard atau sesuaikan namanya
-                                    FormDashboard dashboard = new FormDashboard();
-                                    dashboard.Show();
-                                    this.Hide();
-                                }
+                                dashboard.ShowDialog();
                             }
-                            else
+                            else if (role == "Warga" || role == "Muzakki")
                             {
-                                MessageBox.Show("Username atau Password salah!", "Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                FormDonasi donasi =
+                                    new FormDonasi();
+
+                                donasi.ShowDialog();
                             }
+                            else if (role == "Mustahik")
+                            {
+                                FormRiwayat riwayat =
+                                    new FormRiwayat();
+
+                                riwayat.ShowDialog();
+                            }
+
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show(
+                                "Username atau Password salah!",
+                                "Login Gagal",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Terjadi Kesalahan Koneksi: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(
+                        "Kesalahan Database:\n" + ex.Message,
+                        "SQL Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Terjadi kesalahan:\n" + ex.Message,
+                        "System Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
         }
-        private void chkShow_CheckedChanged(object sender, EventArgs e)
+
+        // Tombol Keluar
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            // Toggle visibility password
-            txtPassword.UseSystemPasswordChar = !chkShow.Checked;
+            if (MessageBox.Show(
+                "Apakah Anda yakin ingin keluar?",
+                "Konfirmasi",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question)
+                == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }
-
-
-
-
-

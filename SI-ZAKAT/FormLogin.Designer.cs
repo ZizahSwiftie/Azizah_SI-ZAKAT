@@ -42,7 +42,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(173, 323);
+            this.label1.Location = new System.Drawing.Point(372, 286);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 20);
             this.label1.TabIndex = 0;
@@ -51,7 +51,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(173, 388);
+            this.label2.Location = new System.Drawing.Point(372, 351);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 1;
@@ -59,14 +59,14 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(303, 323);
+            this.txtUsername.Location = new System.Drawing.Point(502, 286);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(211, 26);
             this.txtUsername.TabIndex = 2;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(303, 382);
+            this.txtPassword.Location = new System.Drawing.Point(502, 345);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(211, 26);
             this.txtPassword.TabIndex = 3;
@@ -75,7 +75,7 @@
             // chkShow
             // 
             this.chkShow.AutoSize = true;
-            this.chkShow.Location = new System.Drawing.Point(303, 423);
+            this.chkShow.Location = new System.Drawing.Point(502, 386);
             this.chkShow.Name = "chkShow";
             this.chkShow.Size = new System.Drawing.Size(148, 24);
             this.chkShow.TabIndex = 4;
@@ -85,7 +85,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(283, 515);
+            this.btnLogin.Location = new System.Drawing.Point(489, 466);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(119, 37);
             this.btnLogin.TabIndex = 5;
@@ -96,7 +96,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(144, 70);
+            this.pictureBox1.Location = new System.Drawing.Point(340, 51);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(423, 179);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -107,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 623);
+            this.ClientSize = new System.Drawing.Size(1178, 544);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.chkShow);
@@ -116,6 +116,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormLogin";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

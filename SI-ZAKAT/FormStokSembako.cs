@@ -166,5 +166,11 @@ namespace SI_ZAKAT
             txtStok.Clear();
             txtIDBarang.Focus();
         }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
     }
 }

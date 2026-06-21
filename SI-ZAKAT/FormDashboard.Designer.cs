@@ -28,158 +28,106 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelSidebar = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panelKonten = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.btnPenyaluran = new System.Windows.Forms.Button();
             this.btnStokSembako = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnValidasiDonasi = new System.Windows.Forms.Button();
             this.btnDonasi = new System.Windows.Forms.Button();
             this.btnDataWarga = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lblTotalDana = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.lblTotalWarga = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label10 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.lblStokBarang = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.panelKonten = new System.Windows.Forms.Panel();
+            this.panelPieChart = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lblTotalSalur = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.panel1.SuspendLayout();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblTotalStokBarang = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblTotalWarga = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblTotalDana = new System.Windows.Forms.Label();
+            this.btnDashboard = new System.Windows.Forms.Label();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.panelSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelKonten.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelSidebar
             // 
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(160, -2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(644, 81);
-            this.panel1.TabIndex = 0;
+            this.panelSidebar.Controls.Add(this.pictureBox1);
+            this.panelSidebar.Controls.Add(this.btnLogout);
+            this.panelSidebar.Controls.Add(this.btnPenyaluran);
+            this.panelSidebar.Controls.Add(this.btnStokSembako);
+            this.panelSidebar.Controls.Add(this.btnValidasiDonasi);
+            this.panelSidebar.Controls.Add(this.btnDonasi);
+            this.panelSidebar.Controls.Add(this.btnDataWarga);
+            this.panelSidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelSidebar.Location = new System.Drawing.Point(0, 0);
+            this.panelSidebar.Name = "panelSidebar";
+            this.panelSidebar.Size = new System.Drawing.Size(163, 454);
+            this.panelSidebar.TabIndex = 0;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::SI_ZAKAT.Properties.Resources.logo_si_zakat;
-            this.pictureBox1.Location = new System.Drawing.Point(19, 14);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(138, 52);
+            this.pictureBox1.Size = new System.Drawing.Size(163, 83);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // label1
+            // btnLogout
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(163, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "DASHBOARD";
-            // 
-            // panelKonten
-            // 
-            this.panelKonten.Controls.Add(this.button8);
-            this.panelKonten.Controls.Add(this.button7);
-            this.panelKonten.Controls.Add(this.button6);
-            this.panelKonten.Controls.Add(this.btnPenyaluran);
-            this.panelKonten.Controls.Add(this.btnStokSembako);
-            this.panelKonten.Controls.Add(this.button3);
-            this.panelKonten.Controls.Add(this.btnDonasi);
-            this.panelKonten.Controls.Add(this.btnDataWarga);
-            this.panelKonten.Location = new System.Drawing.Point(-3, -2);
-            this.panelKonten.Name = "panelKonten";
-            this.panelKonten.Size = new System.Drawing.Size(165, 452);
-            this.panelKonten.TabIndex = 1;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(3, 30);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(162, 47);
-            this.button8.TabIndex = 7;
-            this.button8.Text = "Dashboard";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(0, 368);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(165, 55);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Logout";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(3, 318);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(162, 53);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Pencarian";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnLogout.BackColor = System.Drawing.Color.IndianRed;
+            this.btnLogout.Location = new System.Drawing.Point(0, 390);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(163, 64);
+            this.btnLogout.TabIndex = 5;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // btnPenyaluran
             // 
-            this.btnPenyaluran.Location = new System.Drawing.Point(3, 269);
+            this.btnPenyaluran.Location = new System.Drawing.Point(0, 329);
             this.btnPenyaluran.Name = "btnPenyaluran";
-            this.btnPenyaluran.Size = new System.Drawing.Size(162, 52);
+            this.btnPenyaluran.Size = new System.Drawing.Size(163, 64);
             this.btnPenyaluran.TabIndex = 4;
             this.btnPenyaluran.Text = "Penyaluran";
             this.btnPenyaluran.UseVisualStyleBackColor = true;
+            this.btnPenyaluran.Click += new System.EventHandler(this.btnPenyaluran_Click);
             // 
             // btnStokSembako
             // 
-            this.btnStokSembako.Location = new System.Drawing.Point(0, 218);
+            this.btnStokSembako.Location = new System.Drawing.Point(0, 268);
             this.btnStokSembako.Name = "btnStokSembako";
-            this.btnStokSembako.Size = new System.Drawing.Size(165, 55);
+            this.btnStokSembako.Size = new System.Drawing.Size(163, 64);
             this.btnStokSembako.TabIndex = 3;
             this.btnStokSembako.Text = "Stok Sembako";
             this.btnStokSembako.UseVisualStyleBackColor = true;
             this.btnStokSembako.Click += new System.EventHandler(this.btnStokSembako_Click);
             // 
-            // button3
+            // btnValidasiDonasi
             // 
-            this.button3.Location = new System.Drawing.Point(3, 170);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(162, 51);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Validasi Donasi";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnValidasiDonasi.Location = new System.Drawing.Point(0, 206);
+            this.btnValidasiDonasi.Name = "btnValidasiDonasi";
+            this.btnValidasiDonasi.Size = new System.Drawing.Size(163, 64);
+            this.btnValidasiDonasi.TabIndex = 2;
+            this.btnValidasiDonasi.Text = "Validasi Donasi";
+            this.btnValidasiDonasi.UseVisualStyleBackColor = true;
+            this.btnValidasiDonasi.Click += new System.EventHandler(this.btnValidasiDonasi_Click);
             // 
             // btnDonasi
             // 
-            this.btnDonasi.Location = new System.Drawing.Point(3, 119);
+            this.btnDonasi.Location = new System.Drawing.Point(0, 144);
             this.btnDonasi.Name = "btnDonasi";
-            this.btnDonasi.Size = new System.Drawing.Size(162, 55);
+            this.btnDonasi.Size = new System.Drawing.Size(163, 64);
             this.btnDonasi.TabIndex = 1;
             this.btnDonasi.Text = "Donasi";
             this.btnDonasi.UseVisualStyleBackColor = true;
@@ -187,275 +135,185 @@
             // 
             // btnDataWarga
             // 
-            this.btnDataWarga.Location = new System.Drawing.Point(0, 68);
+            this.btnDataWarga.Location = new System.Drawing.Point(0, 82);
             this.btnDataWarga.Name = "btnDataWarga";
-            this.btnDataWarga.Size = new System.Drawing.Size(165, 54);
+            this.btnDataWarga.Size = new System.Drawing.Size(163, 64);
             this.btnDataWarga.TabIndex = 0;
             this.btnDataWarga.Text = "Data Warga";
             this.btnDataWarga.UseVisualStyleBackColor = true;
             this.btnDataWarga.Click += new System.EventHandler(this.btnDataWarga_Click);
             // 
-            // panel3
+            // panelKonten
             // 
-            this.panel3.Controls.Add(this.lblTotalDana);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Location = new System.Drawing.Point(179, 117);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(190, 114);
-            this.panel3.TabIndex = 2;
+            this.panelKonten.Controls.Add(this.panelPieChart);
+            this.panelKonten.Controls.Add(this.groupBox4);
+            this.panelKonten.Controls.Add(this.groupBox3);
+            this.panelKonten.Controls.Add(this.groupBox2);
+            this.panelKonten.Controls.Add(this.groupBox1);
+            this.panelKonten.Controls.Add(this.btnDashboard);
+            this.panelKonten.Controls.Add(this.panelHeader);
+            this.panelKonten.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelKonten.Location = new System.Drawing.Point(163, 0);
+            this.panelKonten.Name = "panelKonten";
+            this.panelKonten.Size = new System.Drawing.Size(641, 454);
+            this.panelKonten.TabIndex = 1;
             // 
-            // lblTotalDana
+            // panelPieChart
             // 
-            this.lblTotalDana.AutoSize = true;
-            this.lblTotalDana.Location = new System.Drawing.Point(9, 76);
-            this.lblTotalDana.Name = "lblTotalDana";
-            this.lblTotalDana.Size = new System.Drawing.Size(171, 20);
-            this.lblTotalDana.TabIndex = 2;
-            this.lblTotalDana.Text = "Total Dana (terkumpul)";
+            this.panelPieChart.Location = new System.Drawing.Point(235, 271);
+            this.panelPieChart.Name = "panelPieChart";
+            this.panelPieChart.Size = new System.Drawing.Size(368, 145);
+            this.panelPieChart.TabIndex = 6;
+            this.panelPieChart.TabStop = false;
+            this.panelPieChart.Text = "Donasi Berdasarkan Kategori";
+            this.panelPieChart.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPieChart_Paint);
             // 
-            // label2
+            // groupBox4
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(77, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 25);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::SI_ZAKAT.Properties.Resources.total_donasi;
-            this.pictureBox2.Location = new System.Drawing.Point(13, 14);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(58, 48);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.lblTotalWarga);
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Controls.Add(this.pictureBox3);
-            this.panel4.Location = new System.Drawing.Point(389, 117);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(192, 114);
-            this.panel4.TabIndex = 3;
-            // 
-            // lblTotalWarga
-            // 
-            this.lblTotalWarga.AutoSize = true;
-            this.lblTotalWarga.Location = new System.Drawing.Point(16, 78);
-            this.lblTotalWarga.Name = "lblTotalWarga";
-            this.lblTotalWarga.Size = new System.Drawing.Size(91, 20);
-            this.lblTotalWarga.TabIndex = 2;
-            this.lblTotalWarga.Text = "Total warga";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(74, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 25);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "label3";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::SI_ZAKAT.Properties.Resources.warga;
-            this.pictureBox3.Location = new System.Drawing.Point(13, 12);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(54, 50);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.chart1);
-            this.panel5.Controls.Add(this.label10);
-            this.panel5.Location = new System.Drawing.Point(389, 267);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(403, 154);
-            this.panel5.TabIndex = 4;
-            // 
-            // chart1
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(16, 43);
-            this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(360, 108);
-            this.chart1.TabIndex = 1;
-            this.chart1.Text = "chart1";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(11, 12);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(294, 25);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Donasi Berdasarkan Kategori";
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.lblStokBarang);
-            this.panel6.Controls.Add(this.label4);
-            this.panel6.Controls.Add(this.pictureBox4);
-            this.panel6.Location = new System.Drawing.Point(603, 117);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(189, 114);
-            this.panel6.TabIndex = 5;
-            // 
-            // lblStokBarang
-            // 
-            this.lblStokBarang.AutoSize = true;
-            this.lblStokBarang.Location = new System.Drawing.Point(6, 79);
-            this.lblStokBarang.Name = "lblStokBarang";
-            this.lblStokBarang.Size = new System.Drawing.Size(181, 20);
-            this.lblStokBarang.TabIndex = 2;
-            this.lblStokBarang.Text = "Total Stok Barang (item)";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(75, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 25);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "label4";
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::SI_ZAKAT.Properties.Resources.Screenshot_2026_05_18_033125;
-            this.pictureBox4.Location = new System.Drawing.Point(13, 12);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(55, 50);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 0;
-            this.pictureBox4.TabStop = false;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.lblTotalSalur);
-            this.panel7.Controls.Add(this.label5);
-            this.panel7.Controls.Add(this.pictureBox5);
-            this.panel7.Location = new System.Drawing.Point(179, 267);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(190, 154);
-            this.panel7.TabIndex = 6;
+            this.groupBox4.Controls.Add(this.lblTotalSalur);
+            this.groupBox4.Location = new System.Drawing.Point(34, 271);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(168, 145);
+            this.groupBox4.TabIndex = 5;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Total Penyaluran";
             // 
             // lblTotalSalur
             // 
             this.lblTotalSalur.AutoSize = true;
-            this.lblTotalSalur.Location = new System.Drawing.Point(13, 81);
+            this.lblTotalSalur.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalSalur.Location = new System.Drawing.Point(64, 58);
             this.lblTotalSalur.Name = "lblTotalSalur";
-            this.lblTotalSalur.Size = new System.Drawing.Size(127, 20);
-            this.lblTotalSalur.TabIndex = 2;
-            this.lblTotalSalur.Text = "Total Penyaluran";
+            this.lblTotalSalur.Size = new System.Drawing.Size(24, 25);
+            this.lblTotalSalur.TabIndex = 0;
+            this.lblTotalSalur.Text = "0";
             // 
-            // label5
+            // groupBox3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(77, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 25);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "label5";
+            this.groupBox3.Controls.Add(this.lblTotalStokBarang);
+            this.groupBox3.Location = new System.Drawing.Point(436, 108);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(168, 145);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Total Stok Barang (item)";
             // 
-            // pictureBox5
+            // lblTotalStokBarang
             // 
-            this.pictureBox5.Image = global::SI_ZAKAT.Properties.Resources.penyalutran;
-            this.pictureBox5.Location = new System.Drawing.Point(13, 16);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(58, 50);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 0;
-            this.pictureBox5.TabStop = false;
+            this.lblTotalStokBarang.AutoSize = true;
+            this.lblTotalStokBarang.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalStokBarang.Location = new System.Drawing.Point(11, 54);
+            this.lblTotalStokBarang.Name = "lblTotalStokBarang";
+            this.lblTotalStokBarang.Size = new System.Drawing.Size(70, 25);
+            this.lblTotalStokBarang.TabIndex = 0;
+            this.lblTotalStokBarang.Text = "label2";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblTotalWarga);
+            this.groupBox2.Location = new System.Drawing.Point(233, 108);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(168, 145);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Total Warga";
+            // 
+            // lblTotalWarga
+            // 
+            this.lblTotalWarga.AutoSize = true;
+            this.lblTotalWarga.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalWarga.Location = new System.Drawing.Point(38, 54);
+            this.lblTotalWarga.Name = "lblTotalWarga";
+            this.lblTotalWarga.Size = new System.Drawing.Size(70, 25);
+            this.lblTotalWarga.TabIndex = 0;
+            this.lblTotalWarga.Text = "label2";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblTotalDana);
+            this.groupBox1.Location = new System.Drawing.Point(35, 108);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(168, 145);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Total Dana (terkumpul)";
+            // 
+            // lblTotalDana
+            // 
+            this.lblTotalDana.AutoSize = true;
+            this.lblTotalDana.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalDana.Location = new System.Drawing.Point(17, 54);
+            this.lblTotalDana.Name = "lblTotalDana";
+            this.lblTotalDana.Size = new System.Drawing.Size(70, 25);
+            this.lblTotalDana.TabIndex = 0;
+            this.lblTotalDana.Text = "label2";
+            // 
+            // btnDashboard
+            // 
+            this.btnDashboard.AutoSize = true;
+            this.btnDashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDashboard.Location = new System.Drawing.Point(23, 24);
+            this.btnDashboard.Name = "btnDashboard";
+            this.btnDashboard.Size = new System.Drawing.Size(228, 37);
+            this.btnDashboard.TabIndex = 0;
+            this.btnDashboard.Text = "DASHBOARD";
+            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
+            // 
+            // panelHeader
+            // 
+            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(641, 83);
+            this.panelHeader.TabIndex = 1;
             // 
             // FormDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 454);
-            this.Controls.Add(this.panel7);
-            this.Controls.Add(this.panel6);
-            this.Controls.Add(this.panel5);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panelKonten);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelSidebar);
             this.Name = "FormDashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormDashboard";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelSidebar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelKonten.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            this.panelKonten.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panelKonten;
+        private System.Windows.Forms.Panel panelSidebar;
         private System.Windows.Forms.Button btnPenyaluran;
         private System.Windows.Forms.Button btnStokSembako;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnValidasiDonasi;
         private System.Windows.Forms.Button btnDonasi;
         private System.Windows.Forms.Button btnDataWarga;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.Label lblTotalDana;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblTotalWarga;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblStokBarang;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Panel panelKonten;
+        private System.Windows.Forms.Label btnDashboard;
+        private System.Windows.Forms.Panel panelHeader;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox panelPieChart;
         private System.Windows.Forms.Label lblTotalSalur;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblTotalStokBarang;
+        private System.Windows.Forms.Label lblTotalWarga;
+        private System.Windows.Forms.Label lblTotalDana;
     }
 }

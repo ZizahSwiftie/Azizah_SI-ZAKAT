@@ -37,12 +37,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnRiwayat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cbIDDonatur
             // 
             this.cbIDDonatur.FormattingEnabled = true;
-            this.cbIDDonatur.Location = new System.Drawing.Point(325, 57);
+            this.cbIDDonatur.Location = new System.Drawing.Point(324, 77);
             this.cbIDDonatur.Name = "cbIDDonatur";
             this.cbIDDonatur.Size = new System.Drawing.Size(185, 28);
             this.cbIDDonatur.TabIndex = 0;
@@ -50,37 +53,40 @@
             // cbKategori
             // 
             this.cbKategori.FormattingEnabled = true;
-            this.cbKategori.Location = new System.Drawing.Point(325, 114);
+            this.cbKategori.Location = new System.Drawing.Point(324, 134);
             this.cbKategori.Name = "cbKategori";
             this.cbKategori.Size = new System.Drawing.Size(185, 28);
             this.cbKategori.TabIndex = 1;
             // 
             // txtJumlah
             // 
-            this.txtJumlah.Location = new System.Drawing.Point(325, 168);
+            this.txtJumlah.Location = new System.Drawing.Point(324, 188);
             this.txtJumlah.Name = "txtJumlah";
             this.txtJumlah.Size = new System.Drawing.Size(185, 26);
             this.txtJumlah.TabIndex = 2;
+            this.txtJumlah.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtJumlah_KeyPress);
             // 
             // dtpTanggal
             // 
-            this.dtpTanggal.Location = new System.Drawing.Point(325, 225);
+            this.dtpTanggal.Location = new System.Drawing.Point(324, 245);
             this.dtpTanggal.Name = "dtpTanggal";
             this.dtpTanggal.Size = new System.Drawing.Size(200, 26);
             this.dtpTanggal.TabIndex = 3;
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(252, 327);
+            this.btnSubmit.Location = new System.Drawing.Point(252, 302);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(201, 42);
             this.btnSubmit.TabIndex = 4;
             this.btnSubmit.Text = "Submit Donasi";
+            this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmitDonasi_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(201, 60);
+            this.label1.Location = new System.Drawing.Point(200, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 20);
             this.label1.TabIndex = 5;
@@ -89,7 +95,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(201, 114);
+            this.label2.Location = new System.Drawing.Point(200, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 20);
             this.label2.TabIndex = 6;
@@ -98,7 +104,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(201, 174);
+            this.label3.Location = new System.Drawing.Point(200, 194);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 20);
             this.label3.TabIndex = 7;
@@ -107,17 +113,50 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(205, 230);
+            this.label4.Location = new System.Drawing.Point(203, 250);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 20);
             this.label4.TabIndex = 8;
             this.label4.Text = "Tanggal";
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.SystemColors.Info;
+            this.btnBack.Location = new System.Drawing.Point(36, 32);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(112, 39);
+            this.btnBack.TabIndex = 9;
+            this.btnBack.Text = "< Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(109, 347);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(504, 20);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "*Donasi Anda akan berstatus \'Pending\' dan menunggu validasi Admin.";
+            // 
+            // btnRiwayat
+            // 
+            this.btnRiwayat.Location = new System.Drawing.Point(433, 380);
+            this.btnRiwayat.Name = "btnRiwayat";
+            this.btnRiwayat.Size = new System.Drawing.Size(191, 39);
+            this.btnRiwayat.TabIndex = 11;
+            this.btnRiwayat.Text = "Lihat Riwayat Donasi";
+            this.btnRiwayat.UseVisualStyleBackColor = true;
+            this.btnRiwayat.Click += new System.EventHandler(this.btnRiwayat_Click);
             // 
             // FormDonasi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 450);
+            this.Controls.Add(this.btnRiwayat);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -128,8 +167,9 @@
             this.Controls.Add(this.cbKategori);
             this.Controls.Add(this.cbIDDonatur);
             this.Name = "FormDonasi";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormDonasi";
-            this.Click += new System.EventHandler(this.FormDonasi_Load);
+            this.Load += new System.EventHandler(this.FormDonasi_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,5 +186,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnRiwayat;
     }
 }

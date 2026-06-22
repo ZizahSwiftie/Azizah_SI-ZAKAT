@@ -49,18 +49,21 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnBack = new System.Windows.Forms.Button();
+            this.btnImpExcel = new System.Windows.Forms.Button();
+            this.btnImpDb = new System.Windows.Forms.Button();
+            this.btnCetak = new System.Windows.Forms.Button();
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataWarga)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -275,17 +278,8 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(1178, 38);
+            this.bindingNavigator1.Size = new System.Drawing.Size(1178, 33);
             this.bindingNavigator1.TabIndex = 18;
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(34, 33);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem
             // 
@@ -293,6 +287,81 @@
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(54, 28);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 33);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Position";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 31);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 33);
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 33);
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.SystemColors.Info;
+            this.btnBack.Location = new System.Drawing.Point(32, 51);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(112, 39);
+            this.btnBack.TabIndex = 19;
+            this.btnBack.Text = "< Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnImpExcel
+            // 
+            this.btnImpExcel.Location = new System.Drawing.Point(790, 478);
+            this.btnImpExcel.Name = "btnImpExcel";
+            this.btnImpExcel.Size = new System.Drawing.Size(154, 39);
+            this.btnImpExcel.TabIndex = 20;
+            this.btnImpExcel.Text = "Import dari Excel";
+            this.btnImpExcel.UseVisualStyleBackColor = true;
+            this.btnImpExcel.Click += new System.EventHandler(this.btnImpExcel_Click);
+            // 
+            // btnImpDb
+            // 
+            this.btnImpDb.Location = new System.Drawing.Point(950, 478);
+            this.btnImpDb.Name = "btnImpDb";
+            this.btnImpDb.Size = new System.Drawing.Size(177, 39);
+            this.btnImpDb.TabIndex = 21;
+            this.btnImpDb.Text = "Simpan ke Database";
+            this.btnImpDb.UseVisualStyleBackColor = true;
+            this.btnImpDb.Click += new System.EventHandler(this.btnImpDb_Click);
+            // 
+            // btnCetak
+            // 
+            this.btnCetak.Location = new System.Drawing.Point(993, 66);
+            this.btnCetak.Name = "btnCetak";
+            this.btnCetak.Size = new System.Drawing.Size(133, 37);
+            this.btnCetak.TabIndex = 22;
+            this.btnCetak.Text = "Print Report";
+            this.btnCetak.UseVisualStyleBackColor = true;
+            this.btnCetak.Click += new System.EventHandler(this.btnCetak_Click);
+            // 
+            // bindingNavigatorAddNewItem
+            // 
+            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
+            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
+            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(34, 28);
+            this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorDeleteItem
             // 
@@ -321,26 +390,6 @@
             this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(34, 28);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 33);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 31);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 33);
-            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -359,27 +408,14 @@
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(34, 28);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 33);
-            // 
-            // btnBack
-            // 
-            this.btnBack.BackColor = System.Drawing.SystemColors.Info;
-            this.btnBack.Location = new System.Drawing.Point(32, 51);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(112, 39);
-            this.btnBack.TabIndex = 19;
-            this.btnBack.Text = "< Back";
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // FormDataWarga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 544);
+            this.Controls.Add(this.btnCetak);
+            this.Controls.Add(this.btnImpDb);
+            this.Controls.Add(this.btnImpExcel);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.groupBox2);
@@ -435,6 +471,9 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnImpExcel;
+        private System.Windows.Forms.Button btnImpDb;
+        private System.Windows.Forms.Button btnCetak;
     }
 }
 

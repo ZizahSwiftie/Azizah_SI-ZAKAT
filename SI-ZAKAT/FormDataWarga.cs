@@ -3,6 +3,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.IO;
+using ExcelDataReader;
 
 namespace SI_ZAKAT
 {
@@ -165,8 +167,6 @@ namespace SI_ZAKAT
 
         // =========================================================================
         // 6. TOMBOL SIMPAN
-        //    FIX: Gunakan INSERT langsung (bukan SP) jika SP tidak return rowsAffected
-        //    agar pop-up "berhasil disimpan" selalu muncul
         // =========================================================================
         private void btnSimpan_Click(object sender, EventArgs e)
         {
@@ -212,6 +212,129 @@ namespace SI_ZAKAT
                 }
             }
         }
+
+        // =========================================================================
+        // TAMBAHAN: AMALKAN FITUR UCP - IMPORT DARI EXCEL TO DATAGRIEVIEW
+        // =========================================================================
+        private void btnImpExcel_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "Excel Workbook|*.xlsx" })
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string filePath = openFileDialog.FileName;
+
+                        using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+                        using (var reader = ExcelReaderFactory.CreateReader(stream))
+                        {
+                            DataTable dt = new DataTable();
+                            bool isHeaderRead = false;
+
+                            // Membaca data Excel baris demi baris secara manual dan dinamis
+                            while (reader.Read())
+                            {
+                                // Baris pertama di Excel dijadikan sebagai nama kolom di DataTable C#
+                                if (!isHeaderRead)
+                                {
+                                    for (int i = 0; i < reader.FieldCount; i++)
+                                    {
+                                        string columnName = reader.GetValue(i)?.ToString() ?? "Kolom" + i;
+                                        dt.Columns.Add(columnName);
+                                    }
+                                    isHeaderRead = true;
+                                    continue;
+                                }
+
+                                // Baris selanjutnya dimasukkan sebagai baris data (Row Data)
+                                DataRow row = dt.NewRow();
+                                for (int i = 0; i < reader.FieldCount; i++)
+                                {
+                                    row[i] = reader.GetValue(i);
+                                }
+                                dt.Rows.Add(row);
+                            }
+
+                            // Tampilkan ke DataGridView milikmu
+                            dgvDataWarga.DataSource = dt;
+
+                            // Mengatur state tombol UI agar aman
+                            dgvDataWarga.Enabled = false;
+                            btnImpDb.Enabled = true;
+                            btnSimpan.Enabled = false;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Gagal membaca file Excel: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void btnImpDb_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Mengambil referensi data temporer dari DataGridView
+                DataTable dt = (DataTable)dgvDataWarga.DataSource;
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("Tidak ada data warga di dalam tabel untuk diimport.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int totalDiproses = 0;
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    // Looping membaca baris demi baris dari tabel Excel
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        // Pastikan penamaan di dalam kurung siku [] ini sama persis dengan judul kolom di file Excel kamu!
+                        string nik = row["NIK"].ToString().Trim();
+                        string nama = row["Nama"].ToString().Trim();
+                        string alamat = row["Alamat"].ToString().Trim();
+                        string peran = row["Peran"].ToString().Trim();
+
+                        // Validasi data kosong di file Excel
+                        if (string.IsNullOrEmpty(nik) || string.IsNullOrEmpty(nama))
+                            continue;
+
+                        // Menembak Stored Procedure sp_ImportWargaExcel yang sudah kebal dari crash duplikasi NIK
+                        using (SqlCommand cmd = new SqlCommand("sp_ImportWargaExcel", conn))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@NIK", nik);
+                            cmd.Parameters.AddWithValue("@Nama", nama);
+                            cmd.Parameters.AddWithValue("@Alamat", alamat);
+                            cmd.Parameters.AddWithValue("@Peran", peran);
+
+                            cmd.ExecuteNonQuery();
+                            totalDiproses++;
+                        }
+                    }
+                }
+
+                MessageBox.Show($"{totalDiproses} data dari Excel selesai diproses oleh database!", "Import Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Kembalikan state UI ke kondisi normal
+                btnImpDb.Enabled = false;
+                dgvDataWarga.Enabled = true;
+                btnSimpan.Enabled = true;
+
+                // Refresh DataGridView agar menampilkan data gabungan terbaru dari database
+                TampilkanData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Terjadi kesalahan sistem saat proses transfer data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
         // =========================================================================
         // 7. TOMBOL UPDATE
@@ -325,6 +448,15 @@ namespace SI_ZAKAT
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void btnCetak_Click(object sender, EventArgs e)
+        {
+            // 1. Membuat objek/instansi dari Form Cetak yang berisi ReportViewer
+            FormCetakZakat halamanCetak = new FormCetakZakat();
+
+            // 2. Menampilkan halaman cetak sebagai pop-up (Modal) di atas form utama
+            halamanCetak.ShowDialog();
         }
 
         // =========================================================================

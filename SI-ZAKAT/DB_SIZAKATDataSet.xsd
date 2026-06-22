@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DB_SIZAKATDataSet" targetNamespace="http://tempuri.org/DB_SIZAKATDataSet.xsd" xmlns:mstns="http://tempuri.org/DB_SIZAKATDataSet.xsd" xmlns="http://tempuri.org/DB_SIZAKATDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="DB_SIZAKATConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DB_SIZAKATConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SI_ZAKAT.Properties.Settings.GlobalReference.Default.DB_SIZAKATConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="vw_LaporanDonasiZakatTableAdapter" GeneratorDataComponentClassName="vw_LaporanDonasiZakatTableAdapter" Name="vw_LaporanDonasiZakat" UserDataComponentName="vw_LaporanDonasiZakatTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DB_SIZAKATConnectionString (Settings)" DbObjectName="DB_SIZAKAT.dbo.vw_LaporanDonasiZakat" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT [ID Transaksi], [NIK Warga], [Nama Warga], [Kategori Zakat], [Jumlah Nominal], [Tanggal Bayar], [Status Verifikasi] FROM dbo.vw_LaporanDonasiZakat</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID Transaksi" DataSetColumn="ID Transaksi" />
+              <Mapping SourceColumn="NIK Warga" DataSetColumn="NIK Warga" />
+              <Mapping SourceColumn="Nama Warga" DataSetColumn="Nama Warga" />
+              <Mapping SourceColumn="Kategori Zakat" DataSetColumn="Kategori Zakat" />
+              <Mapping SourceColumn="Jumlah Nominal" DataSetColumn="Jumlah Nominal" />
+              <Mapping SourceColumn="Tanggal Bayar" DataSetColumn="Tanggal Bayar" />
+              <Mapping SourceColumn="Status Verifikasi" DataSetColumn="Status Verifikasi" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DB_SIZAKATDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="DB_SIZAKATDataSet" msprop:Generator_DataSetName="DB_SIZAKATDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="vw_LaporanDonasiZakat" msprop:Generator_RowEvHandlerName="vw_LaporanDonasiZakatRowChangeEventHandler" msprop:Generator_RowDeletedName="vw_LaporanDonasiZakatRowDeleted" msprop:Generator_RowDeletingName="vw_LaporanDonasiZakatRowDeleting" msprop:Generator_RowEvArgName="vw_LaporanDonasiZakatRowChangeEvent" msprop:Generator_TablePropName="vw_LaporanDonasiZakat" msprop:Generator_RowChangedName="vw_LaporanDonasiZakatRowChanged" msprop:Generator_RowChangingName="vw_LaporanDonasiZakatRowChanging" msprop:Generator_TableClassName="vw_LaporanDonasiZakatDataTable" msprop:Generator_RowClassName="vw_LaporanDonasiZakatRow" msprop:Generator_TableVarName="tablevw_LaporanDonasiZakat" msprop:Generator_UserTableName="vw_LaporanDonasiZakat">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID_x0020_Transaksi" msprop:Generator_ColumnPropNameInRow="ID_Transaksi" msprop:Generator_ColumnPropNameInTable="ID_TransaksiColumn" msprop:Generator_ColumnVarNameInTable="columnID_Transaksi" msprop:Generator_UserColumnName="ID Transaksi" type="xs:int" />
+              <xs:element name="NIK_x0020_Warga" msprop:Generator_ColumnPropNameInRow="NIK_Warga" msprop:Generator_ColumnPropNameInTable="NIK_WargaColumn" msprop:Generator_ColumnVarNameInTable="columnNIK_Warga" msprop:Generator_UserColumnName="NIK Warga">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="16" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Nama_x0020_Warga" msprop:Generator_ColumnPropNameInRow="Nama_Warga" msprop:Generator_ColumnPropNameInTable="Nama_WargaColumn" msprop:Generator_ColumnVarNameInTable="columnNama_Warga" msprop:Generator_UserColumnName="Nama Warga">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Kategori_x0020_Zakat" msprop:Generator_ColumnPropNameInRow="Kategori_Zakat" msprop:Generator_ColumnPropNameInTable="Kategori_ZakatColumn" msprop:Generator_ColumnVarNameInTable="columnKategori_Zakat" msprop:Generator_UserColumnName="Kategori Zakat" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Jumlah_x0020_Nominal" msprop:Generator_ColumnPropNameInRow="Jumlah_Nominal" msprop:Generator_ColumnPropNameInTable="Jumlah_NominalColumn" msprop:Generator_ColumnVarNameInTable="columnJumlah_Nominal" msprop:Generator_UserColumnName="Jumlah Nominal" type="xs:int" minOccurs="0" />
+              <xs:element name="Tanggal_x0020_Bayar" msprop:Generator_ColumnPropNameInRow="Tanggal_Bayar" msprop:Generator_ColumnPropNameInTable="Tanggal_BayarColumn" msprop:Generator_ColumnVarNameInTable="columnTanggal_Bayar" msprop:Generator_UserColumnName="Tanggal Bayar" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Status_x0020_Verifikasi" msprop:Generator_ColumnPropNameInRow="Status_Verifikasi" msprop:Generator_ColumnPropNameInTable="Status_VerifikasiColumn" msprop:Generator_ColumnVarNameInTable="columnStatus_Verifikasi" msprop:Generator_UserColumnName="Status Verifikasi" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:vw_LaporanDonasiZakat" />
+      <xs:field xpath="mstns:ID_x0020_Transaksi" />
+      <xs:field xpath="mstns:NIK_x0020_Warga" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
